@@ -6,14 +6,14 @@
 
 <title>OXIDE Survival UZ</title>
 <meta name="description" content="OXIDE Survival UZ — OXIDE Survival Island Uzbek Gaming Community.">
-<meta name="theme-color" content="#050807">
+<meta name="theme-color" content="#030605">
 
 <style>
 :root{
   --green:#00ff88;
   --green2:#7dffbd;
   --bg:#030605;
-  --panel:rgba(10,17,14,.72);
+  --panel:rgba(10,17,14,.78);
   --line:rgba(255,255,255,.09);
   --muted:#8b9991;
 }
@@ -24,9 +24,7 @@
   box-sizing:border-box;
 }
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
   background:
@@ -38,8 +36,6 @@ body{
   overflow-x:hidden;
 }
 
-/* BACKGROUND GRID */
-
 body:before{
   content:"";
   position:fixed;
@@ -49,10 +45,8 @@ body:before{
     linear-gradient(rgba(0,255,136,.035) 1px,transparent 1px),
     linear-gradient(90deg,rgba(0,255,136,.035) 1px,transparent 1px);
   background-size:55px 55px;
-  mask-image:linear-gradient(to bottom,black,transparent 85%);
+  mask-image:linear-gradient(to bottom,black,transparent 90%);
 }
-
-/* LIGHT */
 
 body:after{
   content:"";
@@ -68,8 +62,6 @@ body:after{
   filter:blur(120px);
   z-index:-4;
 }
-
-/* PARTICLES */
 
 .particles{
   position:fixed;
@@ -147,9 +139,7 @@ body:after{
   transition:.25s;
 }
 
-.nav-links a:hover{
-  color:var(--green);
-}
+.nav-links a:hover{color:var(--green)}
 
 .nav-join{
   color:#001108!important;
@@ -170,9 +160,7 @@ body:after{
   position:relative;
 }
 
-.hero-content{
-  max-width:1050px;
-}
+.hero-content{max-width:1050px}
 
 .badge{
   display:inline-flex;
@@ -209,9 +197,7 @@ body:after{
     0 0 90px rgba(0,255,136,.08);
 }
 
-.hero h1 span{
-  color:var(--green);
-}
+.hero h1 span{color:var(--green)}
 
 .hero-sub{
   max-width:680px;
@@ -244,6 +230,7 @@ body:after{
   background:rgba(255,255,255,.045);
   backdrop-filter:blur(10px);
   transition:.3s;
+  cursor:pointer;
 }
 
 .btn:hover{
@@ -286,9 +273,7 @@ section{
   padding:100px 0;
 }
 
-.section-top{
-  margin-bottom:42px;
-}
+.section-top{margin-bottom:42px}
 
 .eyebrow{
   color:var(--green);
@@ -310,7 +295,181 @@ section{
   font-size:14px;
 }
 
-/* GAME MODES */
+/* MINI GAME */
+
+.game-section{
+  padding-top:70px;
+}
+
+.game-box{
+  position:relative;
+  overflow:hidden;
+  min-height:510px;
+  border:1px solid rgba(0,255,136,.2);
+  border-radius:25px;
+  background:
+    radial-gradient(circle at 50% 40%,rgba(0,255,136,.09),transparent 38%),
+    linear-gradient(145deg,rgba(10,20,15,.95),rgba(3,7,5,.98));
+  box-shadow:
+    inset 0 0 100px rgba(0,255,136,.025),
+    0 20px 70px rgba(0,0,0,.3);
+}
+
+.game-box:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,255,136,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,255,136,.035) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+
+.game-head{
+  position:relative;
+  z-index:2;
+  padding:25px 28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid var(--line);
+}
+
+.game-title{
+  font-size:17px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.game-title span{
+  color:var(--green);
+}
+
+.game-stats{
+  display:flex;
+  gap:20px;
+  font-size:11px;
+  color:#89958f;
+}
+
+.game-stats strong{
+  color:var(--green2);
+  font-size:15px;
+}
+
+.game-area{
+  position:relative;
+  height:390px;
+  z-index:2;
+  overflow:hidden;
+  cursor:crosshair;
+}
+
+.game-start{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  text-align:center;
+  z-index:5;
+  background:rgba(3,7,5,.68);
+  backdrop-filter:blur(5px);
+}
+
+.game-start h3{
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.game-start p{
+  color:#829088;
+  font-size:13px;
+  margin-bottom:22px;
+  max-width:430px;
+  line-height:1.7;
+}
+
+.loot{
+  position:absolute;
+  width:62px;
+  height:62px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  background:rgba(8,18,13,.9);
+  border:1px solid rgba(0,255,136,.3);
+  box-shadow:0 0 25px rgba(0,255,136,.12);
+  cursor:pointer;
+  user-select:none;
+  animation:lootAppear .22s ease-out, lootFloat 1.5s ease-in-out infinite;
+  transition:.12s;
+}
+
+.loot:hover{
+  transform:scale(1.12);
+  border-color:var(--green);
+  box-shadow:0 0 35px rgba(0,255,136,.3);
+}
+
+@keyframes lootAppear{
+  from{opacity:0;transform:scale(.2)}
+  to{opacity:1;transform:scale(1)}
+}
+
+@keyframes lootFloat{
+  50%{margin-top:-5px}
+}
+
+.collect-text{
+  position:absolute;
+  color:var(--green);
+  font-weight:900;
+  font-size:17px;
+  pointer-events:none;
+  animation:collectUp .7s forwards;
+  z-index:20;
+}
+
+@keyframes collectUp{
+  from{opacity:1;transform:translateY(0) scale(1)}
+  to{opacity:0;transform:translateY(-45px) scale(1.2)}
+}
+
+.game-over{
+  position:absolute;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  text-align:center;
+  z-index:10;
+  background:rgba(3,7,5,.88);
+  backdrop-filter:blur(8px);
+}
+
+.game-over h3{
+  font-size:38px;
+  color:var(--green);
+  margin-bottom:8px;
+}
+
+.final-score{
+  color:#a0aca6;
+  margin-bottom:20px;
+}
+
+.final-score strong{
+  color:white;
+  font-size:30px;
+}
+
+/* MODES */
 
 .modes{
   display:grid;
@@ -346,9 +505,7 @@ section{
   margin:20px 0 13px;
 }
 
-.mode h3{
-  font-size:17px;
-}
+.mode h3{font-size:17px}
 
 .mode p{
   color:#7f8c85;
@@ -413,8 +570,6 @@ section{
   font-size:13px;
 }
 
-/* SIDE */
-
 .side-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -439,9 +594,7 @@ section{
   margin-bottom:16px;
 }
 
-.mini-card h3{
-  font-size:16px;
-}
+.mini-card h3{font-size:16px}
 
 .mini-card p{
   color:#7f8b85;
@@ -482,9 +635,7 @@ section{
     #080e0b;
 }
 
-.news-body{
-  padding:22px;
-}
+.news-body{padding:22px}
 
 .news-tag{
   color:var(--green);
@@ -540,52 +691,31 @@ footer{
   font-size:11px;
 }
 
-footer strong{
-  color:var(--green);
-}
+footer strong{color:var(--green)}
 
 /* MOBILE */
 
 @media(max-width:900px){
+  .nav-links a:not(.nav-join){display:none}
 
-  .nav-links a:not(.nav-join){
-    display:none;
-  }
+  .modes{grid-template-columns:1fr 1fr}
 
-  .modes{
-    grid-template-columns:1fr 1fr;
-  }
+  .feature{grid-template-columns:1fr}
 
-  .feature{
-    grid-template-columns:1fr;
-  }
-
-  .news{
-    grid-template-columns:1fr 1fr;
-  }
+  .news{grid-template-columns:1fr 1fr}
 }
 
 @media(max-width:600px){
 
-  .nav{
-    padding:16px 5%;
-  }
+  .nav{padding:16px 5%}
 
-  .hero{
-    padding-top:120px;
-  }
+  .hero{padding-top:120px}
 
-  .hero h1{
-    letter-spacing:-4px;
-  }
+  .hero h1{letter-spacing:-4px}
 
-  .hero-sub{
-    font-size:13px;
-  }
+  .hero-sub{font-size:13px}
 
-  .btn{
-    width:100%;
-  }
+  .btn{width:100%}
 
   .modes,
   .news,
@@ -593,20 +723,30 @@ footer strong{
     grid-template-columns:1fr;
   }
 
-  section{
-    padding:70px 0;
+  section{padding:70px 0}
+
+  .feature-card{min-height:310px}
+
+  .feature-content{padding:25px}
+
+  .feature-content h3{font-size:25px}
+
+  .game-box{min-height:500px}
+
+  .game-head{
+    padding:20px;
+    gap:15px;
   }
 
-  .feature-card{
-    min-height:310px;
+  .game-stats{
+    gap:10px;
   }
 
-  .feature-content{
-    padding:25px;
-  }
+  .game-area{height:390px}
 
-  .feature-content h3{
-    font-size:25px;
+  .loot{
+    width:56px;
+    height:56px;
   }
 }
 </style>
@@ -618,8 +758,6 @@ footer strong{
   <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
 </div>
 
-<!-- NAV -->
-
 <header class="nav">
 
   <a href="#" class="logo">
@@ -627,8 +765,7 @@ footer strong{
   </a>
 
   <div class="nav-links">
-
-    <a href="#modes">GAME</a>
+    <a href="#game">GAME</a>
     <a href="#news">NEWS</a>
 
     <a
@@ -637,11 +774,9 @@ footer strong{
       class="nav-join">
       JOIN COMMUNITY
     </a>
-
   </div>
 
 </header>
-
 
 <main>
 
@@ -690,11 +825,102 @@ footer strong{
         ◎ INSTAGRAM
       </a>
 
+      <a class="btn" href="#game">
+        🎮 PLAY MINI GAME
+      </a>
+
     </div>
 
     <div class="scroll">
       SCROLL TO EXPLORE
       <span>↓</span>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- MINI GAME -->
+
+<section id="game" class="game-section">
+
+  <div class="section-top">
+
+    <div class="eyebrow">
+      OXIDE MINI GAME
+    </div>
+
+    <h2>
+      Loot Hunt
+    </h2>
+
+    <p>
+      30 soniyada imkon qadar ko‘p loot yig‘.
+      Rekordingni yangilay olasanmi?
+    </p>
+
+  </div>
+
+  <div class="game-box">
+
+    <div class="game-head">
+
+      <div class="game-title">
+        OXIDE <span>LOOT HUNT</span>
+      </div>
+
+      <div class="game-stats">
+        <div>
+          TIME
+          <strong id="time">30</strong>
+        </div>
+
+        <div>
+          SCORE
+          <strong id="score">0</strong>
+        </div>
+
+        <div>
+          BEST
+          <strong id="best">0</strong>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="game-area" id="gameArea">
+
+      <div class="game-start" id="gameStart">
+
+        <h3>LOOT HUNT</h3>
+
+        <p>
+          Ekranda paydo bo‘ladigan lootlarni bos.
+          30 soniyada maksimal score yig‘.
+        </p>
+
+        <button class="btn btn-primary" onclick="startGame()">
+          ▶ START GAME
+        </button>
+
+      </div>
+
+      <div class="game-over" id="gameOver">
+
+        <h3>TIME'S UP</h3>
+
+        <div class="final-score">
+          SCORE:
+          <strong id="finalScore">0</strong>
+        </div>
+
+        <button class="btn btn-primary" onclick="startGame()">
+          ↻ PLAY AGAIN
+        </button>
+
+      </div>
+
     </div>
 
   </div>
@@ -712,9 +938,7 @@ footer strong{
       SURVIVAL EXPERIENCE
     </div>
 
-    <h2>
-      O‘yinda seni nima kutadi?
-    </h2>
+    <h2>O‘yinda seni nima kutadi?</h2>
 
     <p>
       Resurs yig‘ishdan tortib kuchli base qurishgacha —
@@ -722,7 +946,6 @@ footer strong{
     </p>
 
   </div>
-
 
   <div class="modes">
 
@@ -736,7 +959,6 @@ footer strong{
       </p>
     </div>
 
-
     <div class="mode">
       <div class="mode-number">02 / PVP</div>
       <div class="mode-icon">⚔️</div>
@@ -747,7 +969,6 @@ footer strong{
       </p>
     </div>
 
-
     <div class="mode">
       <div class="mode-number">03 / BASE</div>
       <div class="mode-icon">🏠</div>
@@ -757,7 +978,6 @@ footer strong{
         kuchli himoya qil.
       </p>
     </div>
-
 
     <div class="mode">
       <div class="mode-number">04 / RAID</div>
@@ -801,62 +1021,42 @@ footer strong{
 
     </div>
 
-
     <div class="side-grid">
 
       <div class="mini-card">
-
         <div class="icon">🚗</div>
-
         <h3>Vehicles</h3>
-
         <p>
           Orol bo‘ylab harakatlanish
           va yangi transportlar.
         </p>
-
       </div>
 
-
       <div class="mini-card">
-
         <div class="icon">🔫</div>
-
         <h3>Weapons</h3>
-
         <p>
           Qurollar, PvP va jangovar
           imkoniyatlar.
         </p>
-
       </div>
 
-
       <div class="mini-card">
-
         <div class="icon">🧱</div>
-
         <h3>Building</h3>
-
         <p>
           Kuchli va kreativ
           base dizaynlari.
         </p>
-
       </div>
 
-
       <div class="mini-card">
-
         <div class="icon">🎁</div>
-
         <h3>Loot</h3>
-
         <p>
           Drop, resurs va
           qimmatli buyumlar.
         </p>
-
       </div>
 
     </div>
@@ -876,9 +1076,7 @@ footer strong{
       LATEST
     </div>
 
-    <h2>
-      OXIDE News
-    </h2>
+    <h2>OXIDE News</h2>
 
     <p>
       O‘yindagi yangiliklar va yangi kontentlar.
@@ -886,24 +1084,17 @@ footer strong{
 
   </div>
 
-
   <div class="news">
 
     <article class="news-card">
 
-      <div class="news-top">
-        🚗
-      </div>
+      <div class="news-top">🚗</div>
 
       <div class="news-body">
 
-        <div class="news-tag">
-          UPDATE
-        </div>
+        <div class="news-tag">UPDATE</div>
 
-        <h3>
-          Yangi transportlar
-        </h3>
+        <h3>Yangi transportlar</h3>
 
         <p>
           Mashinalar va transport tizimi
@@ -914,22 +1105,15 @@ footer strong{
 
     </article>
 
-
     <article class="news-card">
 
-      <div class="news-top">
-        🛡️
-      </div>
+      <div class="news-top">🛡️</div>
 
       <div class="news-body">
 
-        <div class="news-tag">
-          SURVIVAL
-        </div>
+        <div class="news-tag">SURVIVAL</div>
 
-        <h3>
-          Base himoyasi
-        </h3>
+        <h3>Base himoyasi</h3>
 
         <p>
           Bazani himoya qilish va
@@ -940,22 +1124,15 @@ footer strong{
 
     </article>
 
-
     <article class="news-card">
 
-      <div class="news-top">
-        ⚔️
-      </div>
+      <div class="news-top">⚔️</div>
 
       <div class="news-body">
 
-        <div class="news-tag">
-          PVP
-        </div>
+        <div class="news-tag">PVP</div>
 
-        <h3>
-          PvP boshlanadi
-        </h3>
+        <h3>PvP boshlanadi</h3>
 
         <p>
           Janglar, raidlar va serverdagi
@@ -981,9 +1158,7 @@ footer strong{
       OXIDE SURVIVAL UZ
     </div>
 
-    <h2>
-      Hamjamiyatga qo‘shil.
-    </h2>
+    <h2>Hamjamiyatga qo‘shil.</h2>
 
     <p>
       Yangiliklarni kuzat, yangi videolarni ko‘r
@@ -1003,33 +1178,4 @@ footer strong{
       <a
         class="btn"
         href="https://www.youtube.com/@OxideSurvivalUZ"
-        target="_blank">
-        ▶ YOUTUBE
-      </a>
-
-      <a
-        class="btn"
-        href="https://www.instagram.com/OxideSurvivalUZ/"
-        target="_blank">
-        ◎ INSTAGRAM
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-
-</main>
-
-
-<footer>
-
-  © 2026 <strong>OXIDE Survival UZ</strong>
-  <br><br>
-  OXIDE Survival Island • Uzbek Gaming Community
-
-</footer>
-
-</body>
-</html>
+        target="
