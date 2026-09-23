@@ -20,6 +20,8 @@
     --acid:#39ff8c;
     --acid-dim:rgba(57,255,140,.12);
     --rust:#ff8a4c;
+    --gold:#ffd166;
+    --danger:#ff4d5e;
     --text:#eef4f1;
     --text-dim:#8b9791;
     --text-faint:#59635e;
@@ -46,7 +48,6 @@ h1,h2,h3,.logo,.btn,.game-head h3,.game-stat strong{
     font-family:'Rajdhani',Arial,sans-serif;
 }
 
-/* BACKGROUND */
 body::before{
     content:"";
     position:fixed;
@@ -230,7 +231,6 @@ nav{
     margin-top:38px;
 }
 
-/* BUTTONS — industrial cut-corner style */
 .btn{
     position:relative;
     display:inline-flex;
@@ -405,6 +405,11 @@ section{
         radial-gradient(circle at center,rgba(57,255,140,.08),transparent 55%),
         rgba(255,255,255,.025);
     box-shadow:0 0 60px rgba(57,255,140,.06),inset 0 0 50px rgba(57,255,140,.025);
+    transition:box-shadow .25s ease;
+}
+
+.game-box.hit{
+    box-shadow:0 0 60px rgba(255,77,94,.35),inset 0 0 60px rgba(255,77,94,.15);
 }
 
 .game-head{
@@ -427,11 +432,11 @@ section{
 
 .game-stats{
     display:flex;
-    gap:18px;
+    gap:16px;
 }
 
 .game-stat{
-    min-width:60px;
+    min-width:52px;
     text-align:center;
 }
 
@@ -446,6 +451,29 @@ section{
     color:#fff;
     font-size:19px;
     font-weight:700;
+}
+
+.game-stat.combo strong{
+    color:var(--gold);
+    transition:transform .15s ease;
+}
+
+.game-stat.combo.pulse strong{
+    transform:scale(1.25);
+}
+
+.time-track{
+    position:relative;
+    z-index:20;
+    height:4px;
+    background:rgba(255,255,255,.06);
+}
+
+.time-fill{
+    height:100%;
+    width:100%;
+    background:linear-gradient(90deg,var(--acid),var(--gold));
+    transition:width 1s linear;
 }
 
 .game-area{
@@ -481,20 +509,58 @@ section{
 
 .game-overlay p{
     max-width:500px;
-    margin-bottom:25px;
+    margin-bottom:8px;
     color:var(--text-dim);
     line-height:1.6;
+}
+
+.overlay-legend{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin:14px 0 25px;
+    font-size:13px;
+    color:var(--text-dim);
+}
+
+.overlay-legend span{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+}
+
+.overlay-summary{
+    display:flex;
+    gap:22px;
+    margin-bottom:25px;
+}
+
+.overlay-summary div{
+    text-align:center;
+}
+
+.overlay-summary strong{
+    display:block;
+    font-size:28px;
+    color:var(--acid);
+}
+
+.overlay-summary span{
+    font-size:11px;
+    letter-spacing:1px;
+    color:var(--text-faint);
 }
 
 .loot{
     position:absolute;
     z-index:5;
-    width:64px;
-    height:64px;
+    width:60px;
+    height:60px;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:36px;
+    font-size:32px;
     cursor:pointer;
     user-select:none;
     -webkit-user-select:none;
@@ -503,8 +569,26 @@ section{
     background:var(--acid-dim);
     border:1px solid var(--line-accent);
     box-shadow:0 0 20px rgba(57,255,140,.12),inset 0 0 20px rgba(57,255,140,.04);
-    animation:lootAppear .18s ease-out;
+    animation:lootAppear .16s ease-out;
     clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+}
+
+.loot.rare{
+    background:rgba(255,209,102,.1);
+    border-color:rgba(255,209,102,.4);
+    box-shadow:0 0 26px rgba(255,209,102,.25),inset 0 0 20px rgba(255,209,102,.08);
+}
+
+.loot.hazard{
+    background:rgba(255,77,94,.1);
+    border-color:rgba(255,77,94,.4);
+    box-shadow:0 0 22px rgba(255,77,94,.2),inset 0 0 20px rgba(255,77,94,.06);
+}
+
+.loot.timebonus{
+    background:rgba(120,180,255,.1);
+    border-color:rgba(120,180,255,.4);
+    box-shadow:0 0 22px rgba(120,180,255,.2);
 }
 
 .loot:active{
@@ -516,16 +600,35 @@ section{
     to{opacity:1;transform:scale(1)}
 }
 
+.loot.despawn{
+    animation:lootDespawn .35s ease-in forwards;
+    pointer-events:none;
+}
+
+@keyframes lootDespawn{
+    to{opacity:0;transform:scale(.4) rotate(15deg)}
+}
+
 .collect-text{
     position:absolute;
     z-index:8;
     pointer-events:none;
     color:var(--acid);
     font-family:'Rajdhani',Arial,sans-serif;
-    font-size:21px;
+    font-size:20px;
     font-weight:700;
     text-shadow:0 0 10px rgba(57,255,140,.7);
     animation:points .7s ease-out forwards;
+}
+
+.collect-text.bad{
+    color:var(--danger);
+    text-shadow:0 0 10px rgba(255,77,94,.7);
+}
+
+.collect-text.good{
+    color:var(--gold);
+    text-shadow:0 0 10px rgba(255,209,102,.7);
 }
 
 @keyframes points{
@@ -565,11 +668,12 @@ footer strong{
     .stats{grid-template-columns:1fr}
     .game-head{padding:15px}
     .game-head h3{font-size:13px}
-    .game-stats{gap:7px}
-    .game-stat{min-width:45px}
+    .game-stats{gap:10px}
+    .game-stat{min-width:40px}
     .game-stat strong{font-size:15px}
     .game-area{height:375px}
-    .loot{width:58px;height:58px;font-size:31px}
+    .loot{width:54px;height:54px;font-size:28px}
+    .overlay-summary{gap:14px}
 }
 
 @media(max-width:450px){
@@ -580,6 +684,7 @@ footer strong{
     .btn{width:100%}
     .game-overlay h3{font-size:30px}
     .game-area{height:360px}
+    .overlay-legend{font-size:11.5px;gap:10px}
 }
 </style>
 </head>
@@ -674,28 +779,40 @@ footer strong{
     </div>
 
     <div class="game-container">
-        <div class="game-box">
+        <div class="game-box" id="gameBox">
 
             <div class="game-head">
                 <h3>LOOT HUNT</h3>
                 <div class="game-stats">
                     <div class="game-stat"><small>TIME</small><strong id="time">30</strong></div>
                     <div class="game-stat"><small>SCORE</small><strong id="score">0</strong></div>
+                    <div class="game-stat combo" id="comboStat"><small>COMBO</small><strong id="combo">x1</strong></div>
                     <div class="game-stat"><small>BEST</small><strong id="best">0</strong></div>
                 </div>
             </div>
+
+            <div class="time-track"><div class="time-fill" id="timeFill"></div></div>
 
             <div id="gameArea" class="game-area">
 
                 <div id="gameStart" class="game-overlay">
                     <h3>LOOT HUNT</h3>
-                    <p>30 soniya ichida imkon qadar ko‘p loot yig‘. Ko‘proq ball olishga harakat qil!</p>
+                    <p>30 soniya ichida imkon qadar ko‘p loot yig‘ va combo'ni uzmay ushlab tur.</p>
+                    <div class="overlay-legend">
+                        <span>📦 oddiy loot</span>
+                        <span>💎 kamyob — ko‘p ball</span>
+                        <span>🧪 radiatsiya — ball ayiradi</span>
+                        <span>⏱ medkit — +3 soniya</span>
+                    </div>
                     <button id="startGameBtn" class="btn btn-primary" type="button">START GAME</button>
                 </div>
 
                 <div id="gameOver" class="game-overlay hidden">
                     <h3>GAME OVER</h3>
-                    <p>Sizning natijangiz: <strong id="finalScore">0</strong></p>
+                    <div class="overlay-summary">
+                        <div><strong id="finalScore">0</strong><span>SCORE</span></div>
+                        <div><strong id="finalCombo">x1</strong><span>ENG YUQORI COMBO</span></div>
+                    </div>
                     <button id="againBtn" class="btn btn-primary" type="button">PLAY AGAIN</button>
                 </div>
 
@@ -738,117 +855,299 @@ footer strong{
 <script>
 document.addEventListener("DOMContentLoaded", function(){
 
-    const gameArea = document.getElementById("gameArea");
-    const gameStart = document.getElementById("gameStart");
-    const gameOver = document.getElementById("gameOver");
+    var gameBox = document.getElementById("gameBox");
+    var gameArea = document.getElementById("gameArea");
+    var gameStart = document.getElementById("gameStart");
+    var gameOver = document.getElementById("gameOver");
 
-    const startButton = document.getElementById("startGameBtn");
-    const againButton = document.getElementById("againBtn");
+    var startButton = document.getElementById("startGameBtn");
+    var againButton = document.getElementById("againBtn");
 
-    const timeDisplay = document.getElementById("time");
-    const scoreDisplay = document.getElementById("score");
-    const bestDisplay = document.getElementById("best");
-    const finalScoreDisplay = document.getElementById("finalScore");
+    var timeDisplay = document.getElementById("time");
+    var timeFill = document.getElementById("timeFill");
+    var scoreDisplay = document.getElementById("score");
+    var comboDisplay = document.getElementById("combo");
+    var comboStat = document.getElementById("comboStat");
+    var bestDisplay = document.getElementById("best");
+    var finalScoreDisplay = document.getElementById("finalScore");
+    var finalComboDisplay = document.getElementById("finalCombo");
 
-    let score = 0;
-    let time = 30;
-    let timer = null;
-    let playing = false;
-    let best = 0;
+    var TOTAL_TIME = 30;
+
+    var score = 0;
+    var time = TOTAL_TIME;
+    var timer = null;
+    var spawnTimer = null;
+    var playing = false;
+
+    var combo = 0;
+    var maxCombo = 1;
+    var lastCollect = 0;
+
+    var best = 0;
 
     try{
         best = parseInt(localStorage.getItem("oxideLootBest") || "0", 10);
     }catch(error){
         best = 0;
     }
-
+    if(isNaN(best)){ best = 0; }
     bestDisplay.textContent = best;
 
-    const lootTypes = [
-        { emoji:"🪨", points:10 },
-        { emoji:"🪵", points:15 },
-        { emoji:"📦", points:20 },
-        { emoji:"🔩", points:25 },
-        { emoji:"💎", points:50 }
+    /* type: common, rare, hazard, timebonus */
+    var lootTable = [
+        { emoji:"🪨", points:8,  type:"common",    weight:22 },
+        { emoji:"🪵", points:10, type:"common",    weight:20 },
+        { emoji:"📦", points:14, type:"common",    weight:18 },
+        { emoji:"🔩", points:18, type:"common",    weight:14 },
+        { emoji:"💎", points:45, type:"rare",       weight:9  },
+        { emoji:"👑", points:70, type:"rare",       weight:4  },
+        { emoji:"🧪", points:-25, type:"hazard",    weight:9  },
+        { emoji:"⏱️", points:0,  type:"timebonus",  weight:4  }
     ];
 
-    function clearLoot(){
-        gameArea.querySelectorAll(".loot").forEach(function(item){ item.remove(); });
+    var totalWeight = 0;
+    for(var w = 0; w < lootTable.length; w++){
+        totalWeight += lootTable[w].weight;
+    }
+
+    function pickLootType(){
+        var roll = Math.random() * totalWeight;
+        var acc = 0;
+        for(var i = 0; i < lootTable.length; i++){
+            acc += lootTable[i].weight;
+            if(roll <= acc){
+                return lootTable[i];
+            }
+        }
+        return lootTable[0];
+    }
+
+    function activeLootCount(){
+        return gameArea.querySelectorAll(".loot").length;
+    }
+
+    function maxConcurrent(){
+        var elapsed = TOTAL_TIME - time;
+        if(elapsed > 20){ return 3; }
+        if(elapsed > 9){ return 2; }
+        return 1;
+    }
+
+    function spawnDelay(){
+        var elapsed = TOTAL_TIME - time;
+        var delay = 950 - elapsed * 18;
+        if(delay < 380){ delay = 380; }
+        return delay;
+    }
+
+    function clearBoard(){
+        var items = gameArea.querySelectorAll(".loot");
+        for(var i = 0; i < items.length; i++){
+            items[i].remove();
+        }
+        var popups = gameArea.querySelectorAll(".collect-text");
+        for(var j = 0; j < popups.length; j++){
+            popups[j].remove();
+        }
+    }
+
+    function resetHud(){
+        score = 0;
+        time = TOTAL_TIME;
+        combo = 0;
+        maxCombo = 1;
+
+        scoreDisplay.textContent = "0";
+        timeDisplay.textContent = String(TOTAL_TIME);
+        timeFill.style.width = "100%";
+        comboDisplay.textContent = "x1";
     }
 
     function startGame(){
         clearInterval(timer);
+        clearInterval(spawnTimer);
 
-        score = 0;
-        time = 30;
         playing = true;
-
-        scoreDisplay.textContent = "0";
-        timeDisplay.textContent = "30";
+        resetHud();
 
         gameStart.classList.add("hidden");
         gameOver.classList.add("hidden");
 
-        clearLoot();
-        createLoot();
+        clearBoard();
+        scheduleSpawns();
 
         timer = setInterval(function(){
             if(!playing){ return; }
+
             time--;
-            timeDisplay.textContent = time;
-            if(time <= 0){ finishGame(); }
-        },1000);
+            timeDisplay.textContent = String(Math.max(0, time));
+            timeFill.style.width = Math.max(0, (time / TOTAL_TIME) * 100) + "%";
+
+            if(time <= 0){
+                finishGame();
+            }
+        }, 1000);
     }
 
-    function createLoot(){
+    function scheduleSpawns(){
+        clearInterval(spawnTimer);
+
+        spawnTimer = setInterval(function(){
+            if(!playing){ return; }
+            if(activeLootCount() < maxConcurrent()){
+                spawnLoot();
+            }
+        }, spawnDelay());
+
+        /* re-tune spawn speed as difficulty ramps up */
+        setTimeout(function(){
+            if(playing){ scheduleSpawns(); }
+        }, spawnDelay());
+    }
+
+    function spawnLoot(){
         if(!playing){ return; }
 
-        clearLoot();
+        var data = pickLootType();
 
-        const type = lootTypes[Math.floor(Math.random() * lootTypes.length)];
-
-        const loot = document.createElement("div");
+        var loot = document.createElement("div");
         loot.className = "loot";
-        loot.textContent = type.emoji;
-        loot.dataset.points = String(type.points);
+        if(data.type === "rare"){ loot.classList.add("rare"); }
+        if(data.type === "hazard"){ loot.classList.add("hazard"); }
+        if(data.type === "timebonus"){ loot.classList.add("timebonus"); }
 
-        const width = gameArea.clientWidth;
-        const height = gameArea.clientHeight;
-        const lootWidth = 64;
-        const lootHeight = 64;
+        loot.textContent = data.emoji;
 
-        const maxX = Math.max(5, width - lootWidth - 5);
-        const maxY = Math.max(5, height - lootHeight - 5);
+        var width = gameArea.clientWidth;
+        var height = gameArea.clientHeight;
+        var size = 60;
 
-        const x = Math.floor(Math.random() * maxX);
-        const y = Math.floor(Math.random() * maxY);
+        var maxX = Math.max(5, width - size - 5);
+        var maxY = Math.max(5, height - size - 5);
+
+        var x = Math.floor(Math.random() * maxX);
+        var y = Math.floor(Math.random() * maxY);
 
         loot.style.left = x + "px";
         loot.style.top = y + "px";
 
-        loot.addEventListener("click", function(event){
-            collectLoot(loot, type.points, event);
-        });
+        var lifespan = setTimeout(function(){
+            if(loot.parentNode){
+                loot.classList.add("despawn");
+                setTimeout(function(){ loot.remove(); }, 350);
+            }
+        }, 2600);
 
-        loot.addEventListener("touchstart", function(event){
-            event.preventDefault();
-            collectLoot(loot, type.points, event);
-        }, { passive:false });
+        function onCollect(event){
+            if(event){ event.preventDefault(); }
+            clearTimeout(lifespan);
+            collectLoot(loot, data);
+        }
+
+        loot.addEventListener("click", onCollect);
+        loot.addEventListener("touchstart", onCollect, { passive:false });
 
         gameArea.appendChild(loot);
     }
 
-    function collectLoot(loot, points){
+    function popupAt(loot, text, cls){
+        var rect = loot.getBoundingClientRect();
+        var areaRect = gameArea.getBoundingClientRect();
+
+        var popup = document.createElement("div");
+        popup.className = "collect-text" + (cls ? " " + cls : "");
+        popup.textContent = text;
+        popup.style.left = (rect.left - areaRect.left) + "px";
+        popup.style.top = (rect.top - areaRect.top) + "px";
+
+        gameArea.appendChild(popup);
+        setTimeout(function(){ popup.remove(); }, 700);
+    }
+
+    function pulseCombo(){
+        comboStat.classList.add("pulse");
+        setTimeout(function(){ comboStat.classList.remove("pulse"); }, 150);
+    }
+
+    function collectLoot(loot, data){
         if(!playing){ return; }
 
-        score += points;
-        scoreDisplay.textContent = String(score);
+        var now = Date.now();
 
-        const rect = loot.getBoundingClientRect();
-        const areaRect = gameArea.getBoundingClientRect();
+        if(data.type === "hazard"){
 
-        const popup = document.createElement("div");
-        popup.className = "collect-text";
-        popup.textContent = "+" + points;
-        popup.style.left = (rect.left - areaRect.left) + "px";
-        popup.style.t
+            combo = 0;
+            comboDisplay.textContent = "x1";
+
+            score = Math.max(0, score + data.points);
+            scoreDisplay.textContent = String(score);
+
+            popupAt(loot, String(data.points), "bad");
+
+            gameBox.classList.add("hit");
+            setTimeout(function(){ gameBox.classList.remove("hit"); }, 220);
+
+        }else if(data.type === "timebonus"){
+
+            time = Math.min(TOTAL_TIME + 15, time + 3);
+            timeDisplay.textContent = String(time);
+            timeFill.style.width = Math.min(100, (time / TOTAL_TIME) * 100) + "%";
+
+            popupAt(loot, "+3s", "good");
+
+        }else{
+
+            if(now - lastCollect < 1200){
+                combo++;
+            }else{
+                combo = 1;
+            }
+            lastCollect = now;
+
+            var multiplier = 1 + Math.floor(combo / 3);
+            if(multiplier > 5){ multiplier = 5; }
+            if(multiplier > maxCombo){ maxCombo = multiplier; }
+
+            var gained = data.points * multiplier;
+            score += gained;
+            scoreDisplay.textContent = String(score);
+
+            comboDisplay.textContent = "x" + multiplier;
+            pulseCombo();
+
+            popupAt(loot, "+" + gained, data.type === "rare" ? "good" : null);
+        }
+
+        loot.remove();
+    }
+
+    function finishGame(){
+        playing = false;
+
+        clearInterval(timer);
+        clearInterval(spawnTimer);
+        clearBoard();
+
+        finalScoreDisplay.textContent = String(score);
+        finalComboDisplay.textContent = "x" + maxCombo;
+
+        gameOver.classList.remove("hidden");
+
+        if(score > best){
+            best = score;
+            bestDisplay.textContent = String(best);
+            try{
+                localStorage.setItem("oxideLootBest", String(best));
+            }catch(error){}
+        }
+    }
+
+    startButton.addEventListener("click", startGame);
+    againButton.addEventListener("click", startGame);
+
+});
+</script>
+
+</body>
+</html>
