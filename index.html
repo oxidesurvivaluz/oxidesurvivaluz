@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#030605">
 <meta name="description" content="OXIDE Survival UZ — OXIDE Survival Island Uzbek Gaming Community.">
-
 <title>OXIDE Survival UZ</title>
 
 <style>
@@ -33,8 +32,8 @@ body::before{
     inset:0;
     z-index:-5;
     background:
-        radial-gradient(circle at 50% 20%,rgba(0,255,136,.13),transparent 35%),
-        radial-gradient(circle at 10% 80%,rgba(0,255,136,.07),transparent 30%),
+        radial-gradient(circle at 50% 15%,rgba(0,255,136,.14),transparent 35%),
+        radial-gradient(circle at 10% 80%,rgba(0,255,136,.08),transparent 30%),
         #030605;
 }
 
@@ -51,12 +50,15 @@ body::after{
     background-size:45px 45px;
 }
 
-/* SCAN LINE */
+/* SCAN */
 .scan{
     position:fixed;
     left:0;
     right:0;
+    top:-5%;
     height:2px;
+    z-index:50;
+    pointer-events:none;
     background:linear-gradient(
         90deg,
         transparent,
@@ -64,8 +66,6 @@ body::after{
         transparent
     );
     box-shadow:0 0 20px rgba(0,255,136,.4);
-    z-index:20;
-    pointer-events:none;
     animation:scan 7s linear infinite;
 }
 
@@ -87,8 +87,8 @@ body::after{
     position:absolute;
     width:3px;
     height:3px;
-    background:#00ff88;
     border-radius:50%;
+    background:#00ff88;
     opacity:.4;
     animation:float 8s linear infinite;
 }
@@ -127,16 +127,16 @@ nav{
     justify-content:space-between;
     align-items:center;
     padding:18px 7%;
-    background:rgba(3,6,5,.75);
+    background:rgba(3,6,5,.78);
     backdrop-filter:blur(15px);
     border-bottom:1px solid rgba(0,255,136,.12);
 }
 
 .logo{
     color:#00ff88;
+    font-size:20px;
     font-weight:900;
     letter-spacing:2px;
-    font-size:20px;
     text-decoration:none;
 }
 
@@ -164,7 +164,6 @@ nav{
     justify-content:center;
     text-align:center;
     padding:120px 20px 80px;
-    position:relative;
 }
 
 .hero-content{
@@ -174,13 +173,13 @@ nav{
 .badge{
     display:inline-block;
     padding:8px 15px;
+    margin-bottom:25px;
     border:1px solid rgba(0,255,136,.35);
     border-radius:30px;
     color:#00ff88;
     background:rgba(0,255,136,.05);
     font-size:12px;
     letter-spacing:2px;
-    margin-bottom:25px;
 }
 
 .hero h1{
@@ -220,10 +219,13 @@ nav{
     justify-content:center;
     min-width:150px;
     padding:14px 22px;
+    border:0;
     border-radius:10px;
     text-decoration:none;
+    font-family:inherit;
     font-weight:800;
     font-size:14px;
+    cursor:pointer;
     transition:.25s;
 }
 
@@ -353,11 +355,14 @@ section{
 .game-box{
     position:relative;
     overflow:hidden;
-    min-height:500px;
     border:1px solid rgba(0,255,136,.2);
     border-radius:24px;
     background:
-        radial-gradient(circle at center,rgba(0,255,136,.08),transparent 55%),
+        radial-gradient(
+            circle at center,
+            rgba(0,255,136,.08),
+            transparent 55%
+        ),
         rgba(255,255,255,.025);
     box-shadow:
         0 0 60px rgba(0,255,136,.06),
@@ -365,13 +370,15 @@ section{
 }
 
 .game-head{
+    position:relative;
+    z-index:20;
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap:15px;
     padding:20px 25px;
     border-bottom:1px solid rgba(255,255,255,.08);
-    background:rgba(0,0,0,.25);
+    background:rgba(0,0,0,.3);
 }
 
 .game-head h3{
@@ -385,8 +392,8 @@ section{
 }
 
 .game-stat{
-    text-align:center;
     min-width:60px;
+    text-align:center;
 }
 
 .game-stat small{
@@ -407,7 +414,7 @@ section{
     overflow:hidden;
 }
 
-/* GAME OVERLAYS */
+/* OVERLAY */
 .game-overlay{
     position:absolute;
     inset:0;
@@ -416,26 +423,27 @@ section{
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    text-align:center;
     padding:25px;
-    background:rgba(2,5,4,.82);
+    text-align:center;
+    background:rgba(2,5,4,.84);
     backdrop-filter:blur(8px);
-}
-
-.game-overlay h3{
-    font-size:38px;
-    color:#00ff88;
-    margin-bottom:12px;
-}
-
-.game-overlay p{
-    color:#8f9b95;
-    margin-bottom:25px;
-    max-width:500px;
 }
 
 .game-overlay.hidden{
     display:none;
+}
+
+.game-overlay h3{
+    margin-bottom:12px;
+    color:#00ff88;
+    font-size:38px;
+}
+
+.game-overlay p{
+    max-width:500px;
+    margin-bottom:25px;
+    color:#8f9b95;
+    line-height:1.6;
 }
 
 /* LOOT */
@@ -448,34 +456,28 @@ section{
     align-items:center;
     justify-content:center;
     border-radius:16px;
+    font-size:36px;
     cursor:pointer;
     user-select:none;
     -webkit-user-select:none;
-    font-size:36px;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
     background:rgba(0,255,136,.08);
     border:1px solid rgba(0,255,136,.3);
     box-shadow:
         0 0 20px rgba(0,255,136,.12),
         inset 0 0 20px rgba(0,255,136,.04);
     animation:lootAppear .18s ease-out;
-    transition:.12s;
-    touch-action:manipulation;
-}
-
-.loot:hover{
-    transform:scale(1.12);
-    border-color:#00ff88;
-    box-shadow:0 0 30px rgba(0,255,136,.3);
 }
 
 .loot:active{
-    transform:scale(.9);
+    transform:scale(.85);
 }
 
 @keyframes lootAppear{
     from{
         opacity:0;
-        transform:scale(.4);
+        transform:scale(.3);
     }
     to{
         opacity:1;
@@ -490,8 +492,8 @@ section{
     color:#00ff88;
     font-size:20px;
     font-weight:900;
-    animation:points .7s ease-out forwards;
     text-shadow:0 0 10px rgba(0,255,136,.7);
+    animation:points .7s ease-out forwards;
 }
 
 @keyframes points{
@@ -505,7 +507,7 @@ section{
     }
 }
 
-/* SOCIAL */
+/* COMMUNITY */
 .social{
     max-width:900px;
     margin:auto;
@@ -517,8 +519,8 @@ section{
 
 /* FOOTER */
 footer{
-    text-align:center;
     padding:50px 20px;
+    text-align:center;
     color:#5e6964;
     border-top:1px solid rgba(255,255,255,.06);
 }
@@ -554,10 +556,6 @@ footer strong{
         letter-spacing:-3px;
     }
 
-    .game-box{
-        min-height:450px;
-    }
-
     .game-head{
         padding:15px;
     }
@@ -567,7 +565,7 @@ footer strong{
     }
 
     .game-stats{
-        gap:8px;
+        gap:7px;
     }
 
     .game-stat{
@@ -640,13 +638,17 @@ footer strong{
 
 <!-- NAV -->
 <nav>
-    <a href="#" class="logo">OXIDE // UZ</a>
+
+    <a href="#" class="logo">
+        OXIDE // UZ
+    </a>
 
     <div class="nav-links">
         <a href="#about">ABOUT</a>
         <a href="#game">MINI GAME</a>
         <a href="#community">COMMUNITY</a>
     </div>
+
 </nav>
 
 <!-- HERO -->
@@ -800,16 +802,23 @@ footer strong{
 
             </div>
 
-            <div id="gameArea" class="game-area">
+            <div
+                id="gameArea"
+                class="game-area"
+            >
 
-                <!-- START -->
-                <div id="gameStart" class="game-overlay">
+                <!-- START SCREEN -->
+
+                <div
+                    id="gameStart"
+                    class="game-overlay"
+                >
 
                     <h3>LOOT HUNT</h3>
 
                     <p>
-                        30 soniya ichida imkon qadar ko‘p loot yig‘.
-                        Har bir loot turli ball beradi.
+                        30 soniya ichida imkon qadar ko‘p
+                        loot yig‘. Ko‘proq ball olishga harakat qil!
                     </p>
 
                     <button
@@ -822,7 +831,9 @@ footer strong{
 
                 </div>
 
+
                 <!-- GAME OVER -->
+
                 <div
                     id="gameOver"
                     class="game-overlay hidden"
@@ -896,6 +907,7 @@ footer strong{
 
 <!-- FOOTER -->
 <footer>
+
     <p>
         © 2026 <strong>OXIDE Survival UZ</strong>
     </p>
@@ -903,25 +915,29 @@ footer strong{
     <p style="margin-top:10px;">
         Survival Island Uzbek Gaming Community
     </p>
+
 </footer>
 
 
-<!-- MINI GAME JAVASCRIPT -->
 <script>
+/* =========================================================
+   OXIDE SURVIVAL UZ
+   LOOT HUNT MINI GAME
+   ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function(){
 
     const gameArea = document.getElementById("gameArea");
-    const startOverlay = document.getElementById("gameStart");
+    const gameStart = document.getElementById("gameStart");
     const gameOver = document.getElementById("gameOver");
 
     const startButton = document.getElementById("startGameBtn");
     const againButton = document.getElementById("againBtn");
 
-    const timeElement = document.getElementById("time");
-    const scoreElement = document.getElementById("score");
-    const bestElement = document.getElementById("best");
-    const finalScoreElement = document.getElementById("finalScore");
+    const timeDisplay = document.getElementById("time");
+    const scoreDisplay = document.getElementById("score");
+    const bestDisplay = document.getElementById("best");
+    const finalScoreDisplay = document.getElementById("finalScore");
 
     let score = 0;
     let time = 30;
@@ -931,12 +947,15 @@ document.addEventListener("DOMContentLoaded", function(){
     let best = 0;
 
     try{
-        best = Number(localStorage.getItem("oxideLootBest")) || 0;
+        best = parseInt(
+            localStorage.getItem("oxideLootBest") || "0",
+            10
+        );
     }catch(error){
         best = 0;
     }
 
-    bestElement.textContent = best;
+    bestDisplay.textContent = best;
 
 
     const lootTypes = [
@@ -963,12 +982,12 @@ document.addEventListener("DOMContentLoaded", function(){
     ];
 
 
-    function removeLoot(){
+    function clearLoot(){
 
-        const oldLoot =
+        const lootItems =
             gameArea.querySelectorAll(".loot");
 
-        oldLoot.forEach(function(item){
+        lootItems.forEach(function(item){
             item.remove();
         });
 
@@ -983,25 +1002,30 @@ document.addEventListener("DOMContentLoaded", function(){
         time = 30;
         playing = true;
 
-        scoreElement.textContent = "0";
-        timeElement.textContent = "30";
+        scoreDisplay.textContent = "0";
+        timeDisplay.textContent = "30";
 
-        startOverlay.classList.add("hidden");
+        gameStart.classList.add("hidden");
         gameOver.classList.add("hidden");
 
-        removeLoot();
+        clearLoot();
 
-        spawnLoot();
+        createLoot();
+
 
         timer = setInterval(function(){
 
+            if(!playing){
+                return;
+            }
+
             time--;
 
-            timeElement.textContent = time;
+            timeDisplay.textContent = time;
 
             if(time <= 0){
 
-                endGame();
+                finishGame();
 
             }
 
@@ -1010,22 +1034,25 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
 
-    function spawnLoot(){
+    function createLoot(){
 
         if(!playing){
             return;
         }
 
-        removeLoot();
-
-        const randomIndex =
-            Math.floor(Math.random() * lootTypes.length);
+        clearLoot();
 
         const type =
-            lootTypes[randomIndex];
+            lootTypes[
+                Math.floor(
+                    Math.random() * lootTypes.length
+                )
+            ];
+
 
         const loot =
             document.createElement("div");
+
 
         loot.className = "loot";
 
@@ -1036,49 +1063,25 @@ document.addEventListener("DOMContentLoaded", function(){
             String(type.points);
 
 
-        const areaWidth =
+        const width =
             gameArea.clientWidth;
 
-        const areaHeight =
+        const height =
             gameArea.clientHeight;
 
 
-        const lootSize = 70;
+        const lootWidth = 64;
+        const lootHeight = 64;
 
 
         const maxX =
-            Math.max(10, areaWidth - lootSize);
+            Math.max(5, width - lootWidth - 5);
 
         const maxY =
-            Math.max(10, areaHeight - lootSize);
+            Math.max(5, height - lootHeight - 5);
 
 
-        const randomX =
-            Math.floor(Math.random() * maxX);
-
-        const randomY =
-            Math.floor(Math.random() * maxY);
-
-
-        loot.style.left =
-            randomX + "px";
-
-        loot.style.top =
-            randomY + "px";
-
-
-        loot.addEventListener(
-            "click",
-            function(){
-
-                collectLoot(loot);
-
-            }
-        );
-
-
-        loot.addEventListener(
-            "touchstart",
-            function(event){
-
-               
+        const x =
+            Math.floor(
+                Math.random() * maxX
+       
