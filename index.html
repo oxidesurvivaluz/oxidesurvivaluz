@@ -3,1179 +3,1082 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#030605">
+<meta name="description" content="OXIDE Survival UZ — OXIDE Survival Island Uzbek Gaming Community.">
 
 <title>OXIDE Survival UZ</title>
-<meta name="description" content="OXIDE Survival UZ — OXIDE Survival Island Uzbek Gaming Community.">
-<meta name="theme-color" content="#030605">
 
 <style>
-:root{
-  --green:#00ff88;
-  --green2:#7dffbd;
-  --bg:#030605;
-  --panel:rgba(10,17,14,.78);
-  --line:rgba(255,255,255,.09);
-  --muted:#8b9991;
-}
-
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html{scroll-behavior:smooth}
+html{
+    scroll-behavior:smooth;
+}
 
 body{
-  background:
-    radial-gradient(circle at 50% -10%,rgba(0,255,136,.15),transparent 34%),
-    radial-gradient(circle at 0% 55%,rgba(0,180,255,.06),transparent 25%),
-    var(--bg);
-  color:white;
-  font-family:Inter,Arial,Helvetica,sans-serif;
-  overflow-x:hidden;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#030605;
+    color:#fff;
+    overflow-x:hidden;
 }
 
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-5;
-  background-image:
-    linear-gradient(rgba(0,255,136,.035) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,255,136,.035) 1px,transparent 1px);
-  background-size:55px 55px;
-  mask-image:linear-gradient(to bottom,black,transparent 90%);
+/* BACKGROUND */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-5;
+    background:
+        radial-gradient(circle at 50% 20%,rgba(0,255,136,.13),transparent 35%),
+        radial-gradient(circle at 10% 80%,rgba(0,255,136,.07),transparent 30%),
+        #030605;
 }
 
-body:after{
-  content:"";
-  position:fixed;
-  width:600px;
-  height:600px;
-  top:-300px;
-  left:50%;
-  transform:translateX(-50%);
-  border-radius:50%;
-  background:var(--green);
-  opacity:.07;
-  filter:blur(120px);
-  z-index:-4;
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-4;
+    pointer-events:none;
+    opacity:.25;
+    background-image:
+        linear-gradient(rgba(0,255,136,.06) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,255,136,.06) 1px,transparent 1px);
+    background-size:45px 45px;
 }
 
+/* SCAN LINE */
+.scan{
+    position:fixed;
+    left:0;
+    right:0;
+    height:2px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(0,255,136,.5),
+        transparent
+    );
+    box-shadow:0 0 20px rgba(0,255,136,.4);
+    z-index:20;
+    pointer-events:none;
+    animation:scan 7s linear infinite;
+}
+
+@keyframes scan{
+    from{top:-5%}
+    to{top:105%}
+}
+
+/* PARTICLES */
 .particles{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-2;
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    pointer-events:none;
+    overflow:hidden;
 }
 
-.particles i{
-  position:absolute;
-  width:3px;
-  height:3px;
-  border-radius:50%;
-  background:var(--green);
-  opacity:.45;
-  animation:particle 9s linear infinite;
+.particles span{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:#00ff88;
+    border-radius:50%;
+    opacity:.4;
+    animation:float 8s linear infinite;
 }
 
-.particles i:nth-child(1){left:8%;top:85%}
-.particles i:nth-child(2){left:18%;top:40%;animation-delay:2s}
-.particles i:nth-child(3){left:37%;top:75%;animation-delay:4s}
-.particles i:nth-child(4){left:57%;top:30%;animation-delay:1s}
-.particles i:nth-child(5){left:76%;top:70%;animation-delay:3s}
-.particles i:nth-child(6){left:91%;top:45%;animation-delay:5s}
-.particles i:nth-child(7){left:48%;top:55%;animation-delay:6s}
+.particles span:nth-child(1){left:8%;top:20%;animation-delay:0s}
+.particles span:nth-child(2){left:20%;top:70%;animation-delay:2s}
+.particles span:nth-child(3){left:35%;top:40%;animation-delay:4s}
+.particles span:nth-child(4){left:50%;top:80%;animation-delay:1s}
+.particles span:nth-child(5){left:65%;top:25%;animation-delay:3s}
+.particles span:nth-child(6){left:78%;top:60%;animation-delay:5s}
+.particles span:nth-child(7){left:90%;top:35%;animation-delay:2s}
+.particles span:nth-child(8){left:45%;top:10%;animation-delay:6s}
 
-@keyframes particle{
-  0%{transform:translateY(0);opacity:0}
-  20%{opacity:.5}
-  80%{opacity:.5}
-  100%{transform:translateY(-140px);opacity:0}
+@keyframes float{
+    0%{
+        transform:translateY(0) scale(1);
+        opacity:.1;
+    }
+    50%{
+        opacity:.7;
+    }
+    100%{
+        transform:translateY(-100px) scale(1.5);
+        opacity:0;
+    }
 }
 
 /* NAV */
-
-.nav{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  z-index:100;
-  padding:18px 6%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background:rgba(3,6,5,.68);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(255,255,255,.06);
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:100;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 7%;
+    background:rgba(3,6,5,.75);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid rgba(0,255,136,.12);
 }
 
 .logo{
-  color:white;
-  text-decoration:none;
-  font-size:20px;
-  font-weight:1000;
-  letter-spacing:2px;
-}
-
-.logo span{
-  color:var(--green);
-  text-shadow:0 0 20px rgba(0,255,136,.7);
+    color:#00ff88;
+    font-weight:900;
+    letter-spacing:2px;
+    font-size:20px;
+    text-decoration:none;
 }
 
 .nav-links{
-  display:flex;
-  gap:25px;
-  align-items:center;
+    display:flex;
+    gap:25px;
 }
 
 .nav-links a{
-  color:#9ca9a2;
-  text-decoration:none;
-  font-size:12px;
-  font-weight:bold;
-  transition:.25s;
+    color:#aaa;
+    text-decoration:none;
+    font-size:14px;
+    transition:.25s;
 }
 
-.nav-links a:hover{color:var(--green)}
-
-.nav-join{
-  color:#001108!important;
-  background:var(--green);
-  padding:10px 16px;
-  border-radius:8px;
+.nav-links a:hover{
+    color:#00ff88;
 }
 
 /* HERO */
-
 .hero{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:130px 20px 80px;
-  position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:120px 20px 80px;
+    position:relative;
 }
 
-.hero-content{max-width:1050px}
+.hero-content{
+    max-width:900px;
+}
 
 .badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:9px 15px;
-  border:1px solid rgba(0,255,136,.25);
-  border-radius:999px;
-  background:rgba(0,255,136,.05);
-  color:var(--green2);
-  font-size:10px;
-  font-weight:bold;
-  letter-spacing:2.5px;
-  margin-bottom:27px;
-}
-
-.badge:before{
-  content:"";
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 12px var(--green);
+    display:inline-block;
+    padding:8px 15px;
+    border:1px solid rgba(0,255,136,.35);
+    border-radius:30px;
+    color:#00ff88;
+    background:rgba(0,255,136,.05);
+    font-size:12px;
+    letter-spacing:2px;
+    margin-bottom:25px;
 }
 
 .hero h1{
-  font-size:clamp(58px,12vw,140px);
-  line-height:.82;
-  letter-spacing:-7px;
-  font-weight:1000;
-  text-transform:uppercase;
-  text-shadow:
-    0 0 25px rgba(0,255,136,.25),
-    0 0 90px rgba(0,255,136,.08);
+    font-size:clamp(50px,10vw,110px);
+    line-height:.9;
+    font-weight:1000;
+    letter-spacing:-5px;
+    margin-bottom:25px;
+    text-shadow:
+        0 0 15px rgba(0,255,136,.2),
+        0 0 50px rgba(0,255,136,.1);
 }
 
-.hero h1 span{color:var(--green)}
-
-.hero-sub{
-  max-width:680px;
-  margin:32px auto;
-  color:#9aa69f;
-  line-height:1.8;
-  font-size:15px;
+.hero h1 span{
+    color:#00ff88;
 }
 
-.hero-buttons{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
+.hero p{
+    max-width:650px;
+    margin:auto;
+    color:#9baba4;
+    line-height:1.7;
+    font-size:17px;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-top:35px;
 }
 
 .btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  min-width:145px;
-  padding:14px 21px;
-  border-radius:10px;
-  text-decoration:none;
-  color:white;
-  font-size:13px;
-  font-weight:800;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.045);
-  backdrop-filter:blur(10px);
-  transition:.3s;
-  cursor:pointer;
-}
-
-.btn:hover{
-  transform:translateY(-4px);
-  border-color:rgba(0,255,136,.5);
-  box-shadow:0 15px 35px rgba(0,0,0,.25);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:150px;
+    padding:14px 22px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:800;
+    font-size:14px;
+    transition:.25s;
 }
 
 .btn-primary{
-  color:#001108;
-  background:var(--green);
-  border-color:var(--green);
-  box-shadow:0 0 30px rgba(0,255,136,.16);
+    background:#00ff88;
+    color:#00150b;
+    box-shadow:0 0 25px rgba(0,255,136,.25);
 }
 
-.scroll{
-  margin-top:65px;
-  color:#5e6a64;
-  font-size:9px;
-  letter-spacing:4px;
+.btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 35px rgba(0,255,136,.45);
 }
 
-.scroll span{
-  display:block;
-  color:var(--green);
-  font-size:20px;
-  margin-top:10px;
-  animation:bounce 1.6s infinite;
+.btn-secondary{
+    color:#fff;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.03);
 }
 
-@keyframes bounce{
-  50%{transform:translateY(7px)}
+.btn-secondary:hover{
+    border-color:#00ff88;
+    color:#00ff88;
+    transform:translateY(-3px);
 }
 
 /* SECTIONS */
-
 section{
-  width:min(1120px,90%);
-  margin:auto;
-  padding:100px 0;
+    padding:100px 7%;
 }
 
-.section-top{margin-bottom:42px}
-
-.eyebrow{
-  color:var(--green);
-  font-size:10px;
-  font-weight:bold;
-  letter-spacing:3px;
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
 }
 
-.section-top h2{
-  font-size:clamp(32px,5vw,52px);
-  margin-top:9px;
+.section-title small{
+    color:#00ff88;
+    letter-spacing:3px;
+    font-weight:800;
 }
 
-.section-top p{
-  max-width:600px;
-  color:var(--muted);
-  margin-top:13px;
-  line-height:1.7;
-  font-size:14px;
+.section-title h2{
+    margin-top:12px;
+    font-size:clamp(35px,5vw,60px);
 }
 
-/* MINI GAME */
+/* CARDS */
+.cards{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
 
+.card{
+    padding:30px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    background:linear-gradient(
+        145deg,
+        rgba(255,255,255,.045),
+        rgba(255,255,255,.015)
+    );
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    border-color:rgba(0,255,136,.3);
+    box-shadow:0 15px 50px rgba(0,0,0,.35);
+}
+
+.card-icon{
+    font-size:35px;
+    margin-bottom:20px;
+}
+
+.card h3{
+    margin-bottom:12px;
+}
+
+.card p{
+    color:#89948f;
+    line-height:1.6;
+}
+
+/* STATS */
+.stats{
+    max-width:1000px;
+    margin:30px auto 0;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.stat{
+    text-align:center;
+    padding:25px;
+    border-radius:15px;
+    background:rgba(0,255,136,.035);
+    border:1px solid rgba(0,255,136,.12);
+}
+
+.stat strong{
+    display:block;
+    color:#00ff88;
+    font-size:32px;
+}
+
+.stat span{
+    color:#7d8783;
+    font-size:13px;
+}
+
+/* GAME */
 .game-section{
-  padding-top:70px;
+    padding-top:80px;
+}
+
+.game-container{
+    max-width:900px;
+    margin:auto;
 }
 
 .game-box{
-  position:relative;
-  overflow:hidden;
-  min-height:510px;
-  border:1px solid rgba(0,255,136,.2);
-  border-radius:25px;
-  background:
-    radial-gradient(circle at 50% 40%,rgba(0,255,136,.09),transparent 38%),
-    linear-gradient(145deg,rgba(10,20,15,.95),rgba(3,7,5,.98));
-  box-shadow:
-    inset 0 0 100px rgba(0,255,136,.025),
-    0 20px 70px rgba(0,0,0,.3);
-}
-
-.game-box:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background-image:
-    linear-gradient(rgba(0,255,136,.035) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,255,136,.035) 1px,transparent 1px);
-  background-size:40px 40px;
+    position:relative;
+    overflow:hidden;
+    min-height:500px;
+    border:1px solid rgba(0,255,136,.2);
+    border-radius:24px;
+    background:
+        radial-gradient(circle at center,rgba(0,255,136,.08),transparent 55%),
+        rgba(255,255,255,.025);
+    box-shadow:
+        0 0 60px rgba(0,255,136,.06),
+        inset 0 0 50px rgba(0,255,136,.025);
 }
 
 .game-head{
-  position:relative;
-  z-index:2;
-  padding:25px 28px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:20px 25px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:rgba(0,0,0,.25);
 }
 
-.game-title{
-  font-size:17px;
-  font-weight:900;
-  letter-spacing:1px;
-}
-
-.game-title span{
-  color:var(--green);
+.game-head h3{
+    color:#00ff88;
+    letter-spacing:2px;
 }
 
 .game-stats{
-  display:flex;
-  gap:20px;
-  font-size:11px;
-  color:#89958f;
+    display:flex;
+    gap:18px;
 }
 
-.game-stats strong{
-  color:var(--green2);
-  font-size:15px;
+.game-stat{
+    text-align:center;
+    min-width:60px;
+}
+
+.game-stat small{
+    display:block;
+    color:#6e7874;
+    font-size:9px;
+    letter-spacing:1px;
+}
+
+.game-stat strong{
+    color:#fff;
+    font-size:18px;
 }
 
 .game-area{
-  position:relative;
-  height:390px;
-  z-index:2;
-  overflow:hidden;
-  cursor:crosshair;
+    position:relative;
+    height:410px;
+    overflow:hidden;
 }
 
-.game-start{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  text-align:center;
-  z-index:5;
-  background:rgba(3,7,5,.68);
-  backdrop-filter:blur(5px);
+/* GAME OVERLAYS */
+.game-overlay{
+    position:absolute;
+    inset:0;
+    z-index:10;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:25px;
+    background:rgba(2,5,4,.82);
+    backdrop-filter:blur(8px);
 }
 
-.game-start h3{
-  font-size:34px;
-  margin-bottom:10px;
+.game-overlay h3{
+    font-size:38px;
+    color:#00ff88;
+    margin-bottom:12px;
 }
 
-.game-start p{
-  color:#829088;
-  font-size:13px;
-  margin-bottom:22px;
-  max-width:430px;
-  line-height:1.7;
+.game-overlay p{
+    color:#8f9b95;
+    margin-bottom:25px;
+    max-width:500px;
 }
 
+.game-overlay.hidden{
+    display:none;
+}
+
+/* LOOT */
 .loot{
-  position:absolute;
-  width:62px;
-  height:62px;
-  border-radius:16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:30px;
-  background:rgba(8,18,13,.9);
-  border:1px solid rgba(0,255,136,.3);
-  box-shadow:0 0 25px rgba(0,255,136,.12);
-  cursor:pointer;
-  user-select:none;
-  animation:lootAppear .22s ease-out, lootFloat 1.5s ease-in-out infinite;
-  transition:.12s;
+    position:absolute;
+    z-index:5;
+    width:64px;
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:16px;
+    cursor:pointer;
+    user-select:none;
+    -webkit-user-select:none;
+    font-size:36px;
+    background:rgba(0,255,136,.08);
+    border:1px solid rgba(0,255,136,.3);
+    box-shadow:
+        0 0 20px rgba(0,255,136,.12),
+        inset 0 0 20px rgba(0,255,136,.04);
+    animation:lootAppear .18s ease-out;
+    transition:.12s;
+    touch-action:manipulation;
 }
 
 .loot:hover{
-  transform:scale(1.12);
-  border-color:var(--green);
-  box-shadow:0 0 35px rgba(0,255,136,.3);
+    transform:scale(1.12);
+    border-color:#00ff88;
+    box-shadow:0 0 30px rgba(0,255,136,.3);
+}
+
+.loot:active{
+    transform:scale(.9);
 }
 
 @keyframes lootAppear{
-  from{opacity:0;transform:scale(.2)}
-  to{opacity:1;transform:scale(1)}
-}
-
-@keyframes lootFloat{
-  50%{margin-top:-5px}
+    from{
+        opacity:0;
+        transform:scale(.4);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
 }
 
 .collect-text{
-  position:absolute;
-  color:var(--green);
-  font-weight:900;
-  font-size:17px;
-  pointer-events:none;
-  animation:collectUp .7s forwards;
-  z-index:20;
+    position:absolute;
+    z-index:8;
+    pointer-events:none;
+    color:#00ff88;
+    font-size:20px;
+    font-weight:900;
+    animation:points .7s ease-out forwards;
+    text-shadow:0 0 10px rgba(0,255,136,.7);
 }
 
-@keyframes collectUp{
-  from{opacity:1;transform:translateY(0) scale(1)}
-  to{opacity:0;transform:translateY(-45px) scale(1.2)}
+@keyframes points{
+    0%{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+    100%{
+        opacity:0;
+        transform:translateY(-45px) scale(1.2);
+    }
 }
 
-.game-over{
-  position:absolute;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  text-align:center;
-  z-index:10;
-  background:rgba(3,7,5,.88);
-  backdrop-filter:blur(8px);
-}
-
-.game-over h3{
-  font-size:38px;
-  color:var(--green);
-  margin-bottom:8px;
-}
-
-.final-score{
-  color:#a0aca6;
-  margin-bottom:20px;
-}
-
-.final-score strong{
-  color:white;
-  font-size:30px;
-}
-
-/* MODES */
-
-.modes{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-}
-
-.mode{
-  min-height:190px;
-  padding:25px;
-  position:relative;
-  overflow:hidden;
-  border-radius:18px;
-  border:1px solid var(--line);
-  background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.015));
-  transition:.3s;
-}
-
-.mode:hover{
-  transform:translateY(-7px);
-  border-color:rgba(0,255,136,.35);
-}
-
-.mode-number{
-  color:rgba(255,255,255,.16);
-  font-size:11px;
-  font-weight:bold;
-  letter-spacing:2px;
-}
-
-.mode-icon{
-  font-size:31px;
-  margin:20px 0 13px;
-}
-
-.mode h3{font-size:17px}
-
-.mode p{
-  color:#7f8c85;
-  font-size:12px;
-  line-height:1.6;
-  margin-top:8px;
-}
-
-/* FEATURE */
-
-.feature{
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:22px;
-}
-
-.feature-card{
-  min-height:340px;
-  border:1px solid var(--line);
-  border-radius:24px;
-  overflow:hidden;
-  position:relative;
-  background:
-    radial-gradient(circle at 75% 25%,rgba(0,255,136,.12),transparent 30%),
-    linear-gradient(145deg,#0a110e,#050806);
-}
-
-.feature-card:before{
-  content:"";
-  position:absolute;
-  inset:20px;
-  border:1px solid rgba(0,255,136,.08);
-  border-radius:18px;
-}
-
-.feature-content{
-  position:absolute;
-  inset:0;
-  padding:35px;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  background:linear-gradient(transparent 25%,rgba(0,0,0,.82));
-}
-
-.feature-label{
-  color:var(--green);
-  font-size:10px;
-  font-weight:bold;
-  letter-spacing:2px;
-}
-
-.feature-content h3{
-  font-size:30px;
-  margin:9px 0;
-}
-
-.feature-content p{
-  color:#89958f;
-  max-width:500px;
-  line-height:1.6;
-  font-size:13px;
-}
-
-.side-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-}
-
-.mini-card{
-  padding:25px;
-  border-radius:18px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.025);
-  transition:.3s;
-}
-
-.mini-card:hover{
-  border-color:rgba(0,255,136,.3);
-  transform:translateY(-4px);
-}
-
-.mini-card .icon{
-  font-size:26px;
-  margin-bottom:16px;
-}
-
-.mini-card h3{font-size:16px}
-
-.mini-card p{
-  color:#7f8b85;
-  font-size:12px;
-  line-height:1.6;
-  margin-top:8px;
-}
-
-/* NEWS */
-
-.news{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-}
-
-.news-card{
-  border:1px solid var(--line);
-  border-radius:18px;
-  overflow:hidden;
-  background:rgba(255,255,255,.025);
-  transition:.3s;
-}
-
-.news-card:hover{
-  transform:translateY(-5px);
-  border-color:rgba(0,255,136,.3);
-}
-
-.news-top{
-  height:125px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:42px;
-  background:
-    radial-gradient(circle,rgba(0,255,136,.15),transparent 65%),
-    #080e0b;
-}
-
-.news-body{padding:22px}
-
-.news-tag{
-  color:var(--green);
-  font-size:9px;
-  font-weight:bold;
-  letter-spacing:2px;
-}
-
-.news-body h3{
-  font-size:17px;
-  margin:9px 0;
-}
-
-.news-body p{
-  color:#7f8b85;
-  font-size:12px;
-  line-height:1.6;
-}
-
-/* COMMUNITY */
-
-.community{
-  text-align:center;
-  padding:80px 25px;
-  border-radius:28px;
-  border:1px solid rgba(0,255,136,.16);
-  background:
-    radial-gradient(circle at 50% 0%,rgba(0,255,136,.12),transparent 55%),
-    rgba(255,255,255,.02);
-  box-shadow:inset 0 0 100px rgba(0,255,136,.025);
-}
-
-.community h2{
-  font-size:clamp(34px,6vw,62px);
-  letter-spacing:-2px;
-}
-
-.community p{
-  max-width:610px;
-  margin:16px auto 30px;
-  color:#89958f;
-  line-height:1.7;
-  font-size:14px;
+/* SOCIAL */
+.social{
+    max-width:900px;
+    margin:auto;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
 }
 
 /* FOOTER */
-
 footer{
-  padding:50px 20px;
-  text-align:center;
-  border-top:1px solid rgba(255,255,255,.06);
-  color:#56625c;
-  font-size:11px;
+    text-align:center;
+    padding:50px 20px;
+    color:#5e6964;
+    border-top:1px solid rgba(255,255,255,.06);
 }
 
-footer strong{color:var(--green)}
+footer strong{
+    color:#00ff88;
+}
 
 /* MOBILE */
+@media(max-width:800px){
 
-@media(max-width:900px){
-  .nav-links a:not(.nav-join){display:none}
+    nav{
+        padding:15px 5%;
+    }
 
-  .modes{grid-template-columns:1fr 1fr}
+    .nav-links{
+        display:none;
+    }
 
-  .feature{grid-template-columns:1fr}
+    section{
+        padding:75px 5%;
+    }
 
-  .news{grid-template-columns:1fr 1fr}
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        letter-spacing:-3px;
+    }
+
+    .game-box{
+        min-height:450px;
+    }
+
+    .game-head{
+        padding:15px;
+    }
+
+    .game-head h3{
+        font-size:13px;
+    }
+
+    .game-stats{
+        gap:8px;
+    }
+
+    .game-stat{
+        min-width:45px;
+    }
+
+    .game-stat strong{
+        font-size:15px;
+    }
+
+    .game-area{
+        height:375px;
+    }
+
+    .loot{
+        width:58px;
+        height:58px;
+        font-size:31px;
+    }
 }
 
-@media(max-width:600px){
+@media(max-width:450px){
 
-  .nav{padding:16px 5%}
+    .hero{
+        padding-left:15px;
+        padding-right:15px;
+    }
 
-  .hero{padding-top:120px}
+    .hero h1{
+        font-size:52px;
+    }
 
-  .hero h1{letter-spacing:-4px}
+    .hero p{
+        font-size:15px;
+    }
 
-  .hero-sub{font-size:13px}
+    .buttons{
+        flex-direction:column;
+    }
 
-  .btn{width:100%}
+    .btn{
+        width:100%;
+    }
 
-  .modes,
-  .news,
-  .side-grid{
-    grid-template-columns:1fr;
-  }
+    .game-overlay h3{
+        font-size:30px;
+    }
 
-  section{padding:70px 0}
-
-  .feature-card{min-height:310px}
-
-  .feature-content{padding:25px}
-
-  .feature-content h3{font-size:25px}
-
-  .game-box{min-height:500px}
-
-  .game-head{
-    padding:20px;
-    gap:15px;
-  }
-
-  .game-stats{
-    gap:10px;
-  }
-
-  .game-area{height:390px}
-
-  .loot{
-    width:56px;
-    height:56px;
-  }
+    .game-area{
+        height:360px;
+    }
 }
 </style>
 </head>
 
 <body>
 
+<div class="scan"></div>
+
 <div class="particles">
-  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
 </div>
 
-<header class="nav">
+<!-- NAV -->
+<nav>
+    <a href="#" class="logo">OXIDE // UZ</a>
 
-  <a href="#" class="logo">
-    OXIDE<span>UZ</span>
-  </a>
+    <div class="nav-links">
+        <a href="#about">ABOUT</a>
+        <a href="#game">MINI GAME</a>
+        <a href="#community">COMMUNITY</a>
+    </div>
+</nav>
 
-  <div class="nav-links">
-    <a href="#game">GAME</a>
-    <a href="#news">NEWS</a>
+<!-- HERO -->
+<header class="hero">
 
-    <a
-      href="https://t.me/OxideSurvivalUZ"
-      target="_blank"
-      class="nav-join">
-      JOIN COMMUNITY
-    </a>
-  </div>
+    <div class="hero-content">
+
+        <div class="badge">
+            OXIDE SURVIVAL CREATOR
+        </div>
+
+        <h1>
+            OXIDE<br>
+            <span>SURVIVAL UZ</span>
+        </h1>
+
+        <p>
+            OXIDE Survival Island bo‘yicha Uzbek gaming community.
+            Yangiliklar, videolar, serverlar, o‘yinchilar va eksklyuziv kontent.
+        </p>
+
+        <div class="buttons">
+
+            <a
+                class="btn btn-primary"
+                href="https://www.youtube.com/@OxideSurvivalUZ"
+                target="_blank"
+                rel="noopener"
+            >
+                ▶ YouTube
+            </a>
+
+            <a
+                class="btn btn-secondary"
+                href="https://www.instagram.com/OxideSurvivalUZ/"
+                target="_blank"
+                rel="noopener"
+            >
+                ◎ Instagram
+            </a>
+
+            <a
+                class="btn btn-secondary"
+                href="https://t.me/OxideSurvivalUZ"
+                target="_blank"
+                rel="noopener"
+            >
+                ✈ Telegram
+            </a>
+
+        </div>
+
+    </div>
 
 </header>
 
-<main>
+<!-- ABOUT -->
+<section id="about">
 
-<!-- HERO -->
-
-<section class="hero">
-
-  <div class="hero-content">
-
-    <div class="badge">
-      OXIDE SURVIVAL ISLAND • UZ COMMUNITY
+    <div class="section-title">
+        <small>OXIDE COMMUNITY</small>
+        <h2>Survive. Build. Fight.</h2>
     </div>
 
-    <h1>
-      OXIDE<br>
-      <span>SURVIVAL UZ</span>
-    </h1>
+    <div class="cards">
 
-    <p class="hero-sub">
-      OXIDE Survival Island o‘yinining o‘zbek
-      gaming hamjamiyati. Gameplay, PvP, raid,
-      base, yangiliklar va survival kontentlari
-      bir joyda.
-    </p>
+        <div class="card">
+            <div class="card-icon">🎮</div>
+            <h3>Gaming</h3>
+            <p>
+                OXIDE Survival Island bo‘yicha gameplay,
+                PvP, raid, base building va boshqa kontentlar.
+            </p>
+        </div>
 
-    <div class="hero-buttons">
+        <div class="card">
+            <div class="card-icon">⚡</div>
+            <h3>Community</h3>
+            <p>
+                O‘zbekistonlik OXIDE o‘yinchilarini bir joyga
+                birlashtiruvchi community.
+            </p>
+        </div>
 
-      <a
-        class="btn btn-primary"
-        href="https://www.youtube.com/@OxideSurvivalUZ"
-        target="_blank">
-        ▶ WATCH YOUTUBE
-      </a>
-
-      <a
-        class="btn"
-        href="https://t.me/OxideSurvivalUZ"
-        target="_blank">
-        ✈ TELEGRAM
-      </a>
-
-      <a
-        class="btn"
-        href="https://www.instagram.com/OxideSurvivalUZ/"
-        target="_blank">
-        ◎ INSTAGRAM
-      </a>
-
-      <a class="btn" href="#game">
-        🎮 PLAY MINI GAME
-      </a>
+        <div class="card">
+            <div class="card-icon">🔥</div>
+            <h3>Creator</h3>
+            <p>
+                OXIDE Survival UZ orqali yangi o‘yinchilarni
+                OXIDE olamiga jalb qilish va rivojlantirish.
+            </p>
+        </div>
 
     </div>
 
-    <div class="scroll">
-      SCROLL TO EXPLORE
-      <span>↓</span>
-    </div>
+    <div class="stats">
 
-  </div>
+        <div class="stat">
+            <strong>1100+</strong>
+            <span>COMMUNITY</span>
+        </div>
+
+        <div class="stat">
+            <strong>300+</strong>
+            <span>PLAYERS HELPED</span>
+        </div>
+
+        <div class="stat">
+            <strong>24/7</strong>
+            <span>OXIDE CONTENT</span>
+        </div>
+
+    </div>
 
 </section>
-
 
 <!-- MINI GAME -->
-
 <section id="game" class="game-section">
 
-  <div class="section-top">
-
-    <div class="eyebrow">
-      OXIDE MINI GAME
+    <div class="section-title">
+        <small>OXIDE MINI GAME</small>
+        <h2>Loot Hunt</h2>
     </div>
 
-    <h2>
-      Loot Hunt
-    </h2>
+    <div class="game-container">
 
-    <p>
-      30 soniyada imkon qadar ko‘p loot yig‘.
-      Rekordingni yangilay olasanmi?
-    </p>
+        <div class="game-box">
 
-  </div>
+            <div class="game-head">
 
-  <div class="game-box">
+                <h3>LOOT HUNT</h3>
 
-    <div class="game-head">
+                <div class="game-stats">
 
-      <div class="game-title">
-        OXIDE <span>LOOT HUNT</span>
-      </div>
+                    <div class="game-stat">
+                        <small>TIME</small>
+                        <strong id="time">30</strong>
+                    </div>
 
-      <div class="game-stats">
-        <div>
-          TIME
-          <strong id="time">30</strong>
+                    <div class="game-stat">
+                        <small>SCORE</small>
+                        <strong id="score">0</strong>
+                    </div>
+
+                    <div class="game-stat">
+                        <small>BEST</small>
+                        <strong id="best">0</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="gameArea" class="game-area">
+
+                <!-- START -->
+                <div id="gameStart" class="game-overlay">
+
+                    <h3>LOOT HUNT</h3>
+
+                    <p>
+                        30 soniya ichida imkon qadar ko‘p loot yig‘.
+                        Har bir loot turli ball beradi.
+                    </p>
+
+                    <button
+                        id="startGameBtn"
+                        class="btn btn-primary"
+                        type="button"
+                    >
+                        START GAME
+                    </button>
+
+                </div>
+
+                <!-- GAME OVER -->
+                <div
+                    id="gameOver"
+                    class="game-overlay hidden"
+                >
+
+                    <h3>GAME OVER</h3>
+
+                    <p>
+                        Sizning natijangiz:
+                        <strong id="finalScore">0</strong>
+                    </p>
+
+                    <button
+                        id="againBtn"
+                        class="btn btn-primary"
+                        type="button"
+                    >
+                        PLAY AGAIN
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
-
-        <div>
-          SCORE
-          <strong id="score">0</strong>
-        </div>
-
-        <div>
-          BEST
-          <strong id="best">0</strong>
-        </div>
-      </div>
 
     </div>
-
-    <div class="game-area" id="gameArea">
-
-      <div class="game-start" id="gameStart">
-
-        <h3>LOOT HUNT</h3>
-
-        <p>
-          Ekranda paydo bo‘ladigan lootlarni bos.
-          30 soniyada maksimal score yig‘.
-        </p>
-
-        <button class="btn btn-primary" onclick="startGame()">
-          ▶ START GAME
-        </button>
-
-      </div>
-
-      <div class="game-over" id="gameOver">
-
-        <h3>TIME'S UP</h3>
-
-        <div class="final-score">
-          SCORE:
-          <strong id="finalScore">0</strong>
-        </div>
-
-        <button class="btn btn-primary" onclick="startGame()">
-          ↻ PLAY AGAIN
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
 
 </section>
-
-
-<!-- MODES -->
-
-<section id="modes">
-
-  <div class="section-top">
-
-    <div class="eyebrow">
-      SURVIVAL EXPERIENCE
-    </div>
-
-    <h2>O‘yinda seni nima kutadi?</h2>
-
-    <p>
-      Resurs yig‘ishdan tortib kuchli base qurishgacha —
-      OXIDE Survival'dagi asosiy yo‘nalishlar.
-    </p>
-
-  </div>
-
-  <div class="modes">
-
-    <div class="mode">
-      <div class="mode-number">01 / SURVIVAL</div>
-      <div class="mode-icon">🌲</div>
-      <h3>Survival</h3>
-      <p>
-        Resurs yig‘, itemlar tayyorla va
-        orolda omon qol.
-      </p>
-    </div>
-
-    <div class="mode">
-      <div class="mode-number">02 / PVP</div>
-      <div class="mode-icon">⚔️</div>
-      <h3>PvP</h3>
-      <p>
-        Boshqa o‘yinchilar bilan jang qil
-        va serverda ustunlik qil.
-      </p>
-    </div>
-
-    <div class="mode">
-      <div class="mode-number">03 / BASE</div>
-      <div class="mode-icon">🏠</div>
-      <h3>Base</h3>
-      <p>
-        O‘z bazangni qur va resurslaringni
-        kuchli himoya qil.
-      </p>
-    </div>
-
-    <div class="mode">
-      <div class="mode-number">04 / RAID</div>
-      <div class="mode-icon">💥</div>
-      <h3>Raid</h3>
-      <p>
-        Raqib bazalariga hujum qil va
-        qimmatli lootni qo‘lga kirit.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- FEATURE -->
-
-<section>
-
-  <div class="feature">
-
-    <div class="feature-card">
-
-      <div class="feature-content">
-
-        <div class="feature-label">
-          OXIDE SURVIVAL
-        </div>
-
-        <h3>
-          ISLAND. SURVIVE. DOMINATE.
-        </h3>
-
-        <p>
-          Har bir resurs, har bir base va
-          har bir qaror survival uchun muhim.
-        </p>
-
-      </div>
-
-    </div>
-
-    <div class="side-grid">
-
-      <div class="mini-card">
-        <div class="icon">🚗</div>
-        <h3>Vehicles</h3>
-        <p>
-          Orol bo‘ylab harakatlanish
-          va yangi transportlar.
-        </p>
-      </div>
-
-      <div class="mini-card">
-        <div class="icon">🔫</div>
-        <h3>Weapons</h3>
-        <p>
-          Qurollar, PvP va jangovar
-          imkoniyatlar.
-        </p>
-      </div>
-
-      <div class="mini-card">
-        <div class="icon">🧱</div>
-        <h3>Building</h3>
-        <p>
-          Kuchli va kreativ
-          base dizaynlari.
-        </p>
-      </div>
-
-      <div class="mini-card">
-        <div class="icon">🎁</div>
-        <h3>Loot</h3>
-        <p>
-          Drop, resurs va
-          qimmatli buyumlar.
-        </p>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- NEWS -->
-
-<section id="news">
-
-  <div class="section-top">
-
-    <div class="eyebrow">
-      LATEST
-    </div>
-
-    <h2>OXIDE News</h2>
-
-    <p>
-      O‘yindagi yangiliklar va yangi kontentlar.
-    </p>
-
-  </div>
-
-  <div class="news">
-
-    <article class="news-card">
-
-      <div class="news-top">🚗</div>
-
-      <div class="news-body">
-
-        <div class="news-tag">UPDATE</div>
-
-        <h3>Yangi transportlar</h3>
-
-        <p>
-          Mashinalar va transport tizimi
-          survival tajribasini yanada kengaytiradi.
-        </p>
-
-      </div>
-
-    </article>
-
-    <article class="news-card">
-
-      <div class="news-top">🛡️</div>
-
-      <div class="news-body">
-
-        <div class="news-tag">SURVIVAL</div>
-
-        <h3>Base himoyasi</h3>
-
-        <p>
-          Bazani himoya qilish va
-          xavfsiz survival uchun foydali usullar.
-        </p>
-
-      </div>
-
-    </article>
-
-    <article class="news-card">
-
-      <div class="news-top">⚔️</div>
-
-      <div class="news-body">
-
-        <div class="news-tag">PVP</div>
-
-        <h3>PvP boshlanadi</h3>
-
-        <p>
-          Janglar, raidlar va serverdagi
-          eng qiziqarli vaziyatlar.
-        </p>
-
-      </div>
-
-    </article>
-
-  </div>
-
-</section>
-
 
 <!-- COMMUNITY -->
+<section id="community">
 
-<section>
-
-  <div class="community">
-
-    <div class="eyebrow">
-      OXIDE SURVIVAL UZ
+    <div class="section-title">
+        <small>JOIN US</small>
+        <h2>OXIDE Community</h2>
     </div>
 
-    <h2>Hamjamiyatga qo‘shil.</h2>
+    <div class="social">
 
+        <a
+            class="btn btn-primary"
+            href="https://t.me/OxideSurvivalUZ"
+            target="_blank"
+            rel="noopener"
+        >
+            ✈ Telegram
+        </a>
+
+        <a
+            class="btn btn-secondary"
+            href="https://www.instagram.com/OxideSurvivalUZ/"
+            target="_blank"
+            rel="noopener"
+        >
+            ◎ Instagram
+        </a>
+
+        <a
+            class="btn btn-secondary"
+            href="https://www.youtube.com/@OxideSurvivalUZ"
+            target="_blank"
+            rel="noopener"
+        >
+            ▶ YouTube
+        </a>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
     <p>
-      Yangiliklarni kuzat, yangi videolarni ko‘r
-      va OXIDE Survival UZ community'sining bir
-      qismiga aylan.
+        © 2026 <strong>OXIDE Survival UZ</strong>
     </p>
 
-    <div class="hero-buttons">
+    <p style="margin-top:10px;">
+        Survival Island Uzbek Gaming Community
+    </p>
+</footer>
 
-      <a
-        class="btn btn-primary"
-        href="https://t.me/OxideSurvivalUZ"
-        target="_blank">
-        ✈ JOIN TELEGRAM
-      </a>
 
-      <a
-        class="btn"
-        href="https://www.youtube.com/@OxideSurvivalUZ"
-        target="
+<!-- MINI GAME JAVASCRIPT -->
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const gameArea = document.getElementById("gameArea");
+    const startOverlay = document.getElementById("gameStart");
+    const gameOver = document.getElementById("gameOver");
+
+    const startButton = document.getElementById("startGameBtn");
+    const againButton = document.getElementById("againBtn");
+
+    const timeElement = document.getElementById("time");
+    const scoreElement = document.getElementById("score");
+    const bestElement = document.getElementById("best");
+    const finalScoreElement = document.getElementById("finalScore");
+
+    let score = 0;
+    let time = 30;
+    let timer = null;
+    let playing = false;
+
+    let best = 0;
+
+    try{
+        best = Number(localStorage.getItem("oxideLootBest")) || 0;
+    }catch(error){
+        best = 0;
+    }
+
+    bestElement.textContent = best;
+
+
+    const lootTypes = [
+        {
+            emoji:"🪨",
+            points:10
+        },
+        {
+            emoji:"🪵",
+            points:15
+        },
+        {
+            emoji:"📦",
+            points:20
+        },
+        {
+            emoji:"🔩",
+            points:25
+        },
+        {
+            emoji:"💎",
+            points:50
+        }
+    ];
+
+
+    function removeLoot(){
+
+        const oldLoot =
+            gameArea.querySelectorAll(".loot");
+
+        oldLoot.forEach(function(item){
+            item.remove();
+        });
+
+    }
+
+
+    function startGame(){
+
+        clearInterval(timer);
+
+        score = 0;
+        time = 30;
+        playing = true;
+
+        scoreElement.textContent = "0";
+        timeElement.textContent = "30";
+
+        startOverlay.classList.add("hidden");
+        gameOver.classList.add("hidden");
+
+        removeLoot();
+
+        spawnLoot();
+
+        timer = setInterval(function(){
+
+            time--;
+
+            timeElement.textContent = time;
+
+            if(time <= 0){
+
+                endGame();
+
+            }
+
+        },1000);
+
+    }
+
+
+    function spawnLoot(){
+
+        if(!playing){
+            return;
+        }
+
+        removeLoot();
+
+        const randomIndex =
+            Math.floor(Math.random() * lootTypes.length);
+
+        const type =
+            lootTypes[randomIndex];
+
+        const loot =
+            document.createElement("div");
+
+        loot.className = "loot";
+
+        loot.textContent =
+            type.emoji;
+
+        loot.dataset.points =
+            String(type.points);
+
+
+        const areaWidth =
+            gameArea.clientWidth;
+
+        const areaHeight =
+            gameArea.clientHeight;
+
+
+        const lootSize = 70;
+
+
+        const maxX =
+            Math.max(10, areaWidth - lootSize);
+
+        const maxY =
+            Math.max(10, areaHeight - lootSize);
+
+
+        const randomX =
+            Math.floor(Math.random() * maxX);
+
+        const randomY =
+            Math.floor(Math.random() * maxY);
+
+
+        loot.style.left =
+            randomX + "px";
+
+        loot.style.top =
+            randomY + "px";
+
+
+        loot.addEventListener(
+            "click",
+            function(){
+
+                collectLoot(loot);
+
+            }
+        );
+
+
+        loot.addEventListener(
+            "touchstart",
+            function(event){
+
+               
