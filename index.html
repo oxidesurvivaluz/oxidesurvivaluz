@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OXIDE Survival UZ</title>
+<meta name="description" content="OXIDE Survival UZ — OXIDE Survival Island o‘zbek hamjamiyati.">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#020403;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-5;
+
+    background:
+        radial-gradient(circle at 50% 0%,
+        rgba(0,255,130,.18),
+        transparent 35%),
+
+        radial-gradient(circle at 10% 80%,
+        rgba(0,190,255,.08),
+        transparent 30%),
+
+        linear-gradient(
+        rgba(0,255,130,.035) 1px,
+        transparent 1px
+        ),
+
+        linear-gradient(
+        90deg,
+        rgba(0,255,130,.035) 1px,
+        transparent 1px
+        );
+
+    background-size:
+        auto,
+        auto,
+        55px 55px,
+        55px 55px;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:600px;
+    height:600px;
+    top:-250px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#00ff88;
+    opacity:.06;
+    filter:blur(130px);
+    border-radius:50%;
+    z-index:-4;
+}
+
+/* PARTICLES */
+
+.particles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-2;
+}
+
+.particles span{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:#00ff88;
+    border-radius:50%;
+    opacity:.5;
+    animation:float 8s infinite linear;
+}
+
+.particles span:nth-child(1){left:10%;top:80%}
+.particles span:nth-child(2){left:25%;top:30%;animation-delay:2s}
+.particles span:nth-child(3){left:42%;top:70%;animation-delay:4s}
+.particles span:nth-child(4){left:65%;top:25%;animation-delay:1s}
+.particles span:nth-child(5){left:80%;top:65%;animation-delay:3s}
+.particles span:nth-child(6){left:92%;top:40%;animation-delay:5s}
+
+@keyframes float{
+    0%{
+        transform:translateY(0);
+        opacity:0;
+    }
+
+    20%{
+        opacity:.6;
+    }
+
+    80%{
+        opacity:.6;
+    }
+
+    100%{
+        transform:translateY(-120px);
+        opacity:0;
+    }
+}
+
+/* NAVBAR */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:20px 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:rgba(2,4,3,.65);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(255,255,255,.06);
+    z-index:100;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:#00ff88;
+    text-shadow:0 0 18px rgba(0,255,136,.7);
+}
+
+.nav-btn{
+    text-decoration:none;
+    color:#00ff88;
+    font-size:13px;
+    font-weight:bold;
+    border:1px solid rgba(0,255,136,.3);
+    padding:9px 15px;
+    border-radius:8px;
+    transition:.25s;
+}
+
+.nav-btn:hover{
+    background:#00ff88;
+    color:#001108;
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:130px 20px 80px;
+}
+
+.hero-content{
+    max-width:950px;
+}
+
+.badge{
+    display:inline-block;
+    padding:9px 16px;
+    border-radius:30px;
+    border:1px solid rgba(0,255,136,.3);
+    background:rgba(0,255,136,.05);
+    color:#72ffb4;
+    font-size:11px;
+    letter-spacing:3px;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:clamp(55px,11vw,125px);
+    line-height:.85;
+    font-weight:1000;
+    letter-spacing:-6px;
+    text-transform:uppercase;
+    text-shadow:
+        0 0 20px rgba(0,255,136,.3),
+        0 0 80px rgba(0,255,136,.1);
+}
+
+.hero h1 span{
+    color:#00ff88;
+}
+
+.hero-description{
+    max-width:650px;
+    margin:30px auto;
+    color:#9aa69f;
+    line-height:1.8;
+    font-size:16px;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:13px;
+}
+
+.button{
+    text-decoration:none;
+    padding:14px 23px;
+    border-radius:10px;
+    color:#fff;
+    font-size:14px;
+    font-weight:bold;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.04);
+    transition:.3s;
+    backdrop-filter:blur(10px);
+}
+
+.button:hover{
+    transform:translateY(-4px);
+    border-color:#00ff88;
+    box-shadow:0 0 30px rgba(0,255,136,.16);
+}
+
+.primary{
+    color:#001108;
+    background:#00ff88;
+    border-color:#00ff88;
+}
+
+/* SCROLL */
+
+.scroll{
+    margin-top:60px;
+    color:#65736c;
+    font-size:11px;
+    letter-spacing:3px;
+}
+
+.scroll::after{
+    content:"↓";
+    display:block;
+    margin-top:10px;
+    color:#00ff88;
+    font-size:20px;
+}
+
+/* SECTIONS */
+
+section{
+    width:min(1100px,90%);
+    margin:auto;
+    padding:100px 0;
+}
+
+.section-head{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.section-head small{
+    color:#00ff88;
+    letter-spacing:3px;
+    font-size:11px;
+}
+
+.section-head h2{
+    margin-top:12px;
+    font-size:clamp(30px,5vw,48px);
+}
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.card{
+    position:relative;
+    overflow:hidden;
+    padding:30px;
+    min-height:220px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,.07);
+    background:
+        linear-gradient(
+        145deg,
+        rgba(255,255,255,.055),
+        rgba(255,255,255,.015)
+        );
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    border-color:rgba(0,255,136,.35);
+    box-shadow:0 15px 50px rgba(0,0,0,.3);
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    width:140px;
+    height:140px;
+    right:-70px;
+    top:-70px;
+    background:#00ff88;
+    filter:blur(70px);
+    opacity:.1;
+}
+
+.icon{
+    font-size:34px;
+    margin-bottom:20px;
+}
+
+.card h3{
+    font-size:20px;
+    margin-bottom:12px;
+}
+
+.card p{
+    color:#89958f;
+    font-size:14px;
+    line-height:1.7;
+}
+
+/* ABOUT */
+
+.about{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+    align-items:center;
+}
+
+.about-box{
+    padding:35px;
+    border-radius:22px;
+    border:1px solid rgba(255,255,255,.07);
+    background:rgba(255,255,255,.025);
+}
+
+.about-box h2{
+    font-size:35px;
+    margin-bottom:20px;
+}
+
+.about-box p{
+    color:#8e9993;
+    line-height:1.8;
+    font-size:15px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.stat{
+    padding:25px;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.07);
+    background:rgba(255,255,255,.025);
+}
+
+.stat strong{
+    display:block;
+    color:#00ff88;
+    font-size:30px;
+    margin-bottom:5px;
+}
+
+.stat span{
+    color:#7e8b84;
+    font-size:12px;
+}
+
+/* COMMUNITY */
+
+.community{
+    text-align:center;
+    padding:75px 25px;
+    border-radius:28px;
+    border:1px solid rgba(0,255,136,.15);
+
+    background:
+        radial-gradient(
+        circle at center,
+        rgba(0,255,136,.1),
+        transparent 65%
+        ),
+
+        rgba(255,255,255,.02);
+
+    box-shadow:
+        inset 0 0 80px rgba(0,255,136,.025);
+}
+
+.community h2{
+    font-size:clamp(32px,6vw,58px);
+    margin-bottom:15px;
+}
+
+.community p{
+    max-width:600px;
+    margin:0 auto 30px;
+    color:#89958f;
+    line-height:1.7;
+}
+
+/* FOOTER */
+
+footer{
+    padding:50px 20px;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.06);
+    color:#5e6964;
+    font-size:12px;
+}
+
+footer strong{
+    color:#00ff88;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    nav{
+        padding:17px 5%;
+    }
+
+    .hero{
+        padding-top:120px;
+    }
+
+    .hero h1{
+        letter-spacing:-3px;
+    }
+
+    .hero-description{
+        font-size:14px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .about{
+        grid-template-columns:1fr;
+    }
+
+    section{
+        padding:70px 0;
+    }
+}
+
+@media(max-width:450px){
+
+    .logo{
+        font-size:17px;
+    }
+
+    .nav-btn{
+        font-size:10px;
+        padding:8px 10px;
+    }
+
+    .hero h1{
+        font-size:55px;
+    }
+
+    .button{
+        width:100%;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="particles">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<nav>
+
+    <div class="logo">
+        OXIDE<span>UZ</span>
+    </div>
+
+    <a
+        class="nav-btn"
+        href="https://t.me/OxideSurvivalUZ"
+        target="_blank">
+        COMMUNITY
+    </a>
+
+</nav>
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+    <div class="badge">
+        OXIDE SURVIVAL ISLAND • UZ COMMUNITY
+    </div>
+
+    <h1>
+        SURVIVAL<br>
+        <span>UZ</span>
+    </h1>
+
+    <p class="hero-description">
+        OXIDE Survival UZ — OXIDE Survival Island o‘yiniga
+        bag‘ishlangan o‘zbek gaming hamjamiyati.
+        Gameplay, yangiliklar, PvP, base va survival
+        bo‘yicha kontentlar bir joyda.
+    </p>
+
+    <div class="buttons">
+
+        <a
+            class="button primary"
+            href="https://www.youtube.com/@OxideSurvivalUZ"
+            target="_blank">
+            ▶ YouTube
+        </a>
+
+        <a
+            class="button"
+            href="https://t.me/OxideSurvivalUZ"
+            target="_blank">
+            ✈ Telegram
+        </a>
+
+        <a
+            class="button"
+            href="https://www.instagram.com/OxideSurvivalUZ/"
+            target="_blank">
+            ◎ Instagram
+        </a>
+
+    </div>
+
+    <div class="scroll">
+        EXPLORE
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section>
+
+<div class="section-head">
+
+    <small>OXIDE SURVIVAL UZ</small>
+
+    <h2>
+        Survival boshlanadi.
+    </h2>
+
+</div>
+
+<div class="cards">
+
+    <div class="card">
+
+        <div class="icon">🎮</div>
+
+        <h3>Gameplay</h3>
+
+        <p>
+            PvP janglar, raidlar, base qurilishi
+            va OXIDE Survival'dagi qiziqarli
+            vaziyatlar.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="icon">⚡</div>
+
+        <h3>Yangiliklar</h3>
+
+        <p>
+            Update'lar, yangi itemlar,
+            transportlar, qurollar va
+            o‘yindagi yangi imkoniyatlar.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="icon">🛡️</div>
+
+        <h3>Survival</h3>
+
+        <p>
+            Base himoyasi, resurs yig‘ish,
+            PvP va survival bo‘yicha
+            foydali kontent.
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section>
+
+<div class="about">
+
+    <div class="about-box">
+
+        <h2>
+            OXIDE Survival UZ
+        </h2>
+
+        <p>
+            Biz OXIDE Survival Island o‘yinidagi
+            yangiliklar va qiziqarli kontentlarni
+            o‘zbek auditoriyasiga yetkazamiz.
+            Hamjamiyat bilan birga rivojlanamiz,
+            yangi o‘yinchilarni kutib olamiz va
+            survival tajribasini birga oshiramiz.
+        </p>
+
+        <br>
+
+        <a
+            class="button primary"
+            href="https://t.me/OxideSurvivalUZ"
+            target="_blank">
+            Telegramga qo‘shilish
+        </a>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <strong>🎮</strong>
+
+            <span>
+                OXIDE Survival
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>UZ</strong>
+
+            <span>
+                O‘zbek community
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>⚡</strong>
+
+            <span>
+                Yangiliklar
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>🔥</strong>
+
+            <span>
+                Gaming content
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- COMMUNITY -->
+
+<section>
+
+<div class="community">
+
+    <h2>
+        Hamjamiyatga qo‘shil
+    </h2>
+
+    <p>
+        OXIDE Survival UZ bilan birga o‘yna,
+        yangi kontentlarni kuzat va boshqa
+        o‘yinchilar bilan birga rivojlan.
+    </p>
+
+    <div class="buttons">
+
+        <a
+            class="button primary"
+            href="https://t.me/OxideSurvivalUZ"
+            target="_blank">
+            ✈ Telegram
+        </a>
+
+        <a
+            class="button"
+            href="https://www.instagram.com/OxideSurvivalUZ/"
+            target="_blank">
+            ◎ Instagram
+        </a>
+
+        <a
+            class="button"
+            href="https://www.youtube.com/@OxideSurvivalUZ"
+            target="_blank">
+            ▶ YouTube
+        </a>
+
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    © 2026
+    <strong>OXIDE Survival UZ</strong>
+    <br><br>
+    OXIDE Survival Island • Uzbek Community
+
+</footer>
+
+</body>
+      </html>
