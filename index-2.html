@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050705">
+<meta name="description" content="OXIDE Survival UZ — OXIDE Survival Island Uzbek Gaming Community.">
+<title>OXIDE Survival UZ</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#050705;
+    --bg-panel:#0a0f0c;
+    --line:rgba(255,255,255,.08);
+    --line-accent:rgba(57,255,140,.22);
+    --acid:#39ff8c;
+    --acid-dim:rgba(57,255,140,.12);
+    --rust:#ff8a4c;
+    --gold:#ffd166;
+    --danger:#ff4d5e;
+    --text:#eef4f1;
+    --text-dim:#8b9791;
+    --text-faint:#59635e;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Work Sans',Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+h1,h2,h3,.logo,.btn,.game-head h3,.game-stat strong{
+    font-family:'Rajdhani',Arial,sans-serif;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-5;
+    background:
+        radial-gradient(circle at 50% 10%,rgba(57,255,140,.13),transparent 38%),
+        radial-gradient(circle at 8% 85%,rgba(255,138,76,.05),transparent 32%),
+        var(--bg);
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-4;
+    pointer-events:none;
+    opacity:.2;
+    background-image:
+        linear-gradient(var(--line) 1px,transparent 1px),
+        linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:46px 46px;
+}
+
+/* AMBIENT ORBS */
+.orb-field{
+    position:fixed;
+    inset:0;
+    z-index:-3;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.orb{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(70px);
+    opacity:.35;
+    mix-blend-mode:screen;
+}
+
+.orb-1{
+    width:460px;
+    height:460px;
+    left:-120px;
+    top:-80px;
+    background:radial-gradient(circle,var(--acid),transparent 70%);
+    animation:drift1 22s ease-in-out infinite;
+}
+
+.orb-2{
+    width:520px;
+    height:520px;
+    right:-160px;
+    top:30%;
+    background:radial-gradient(circle,var(--rust),transparent 70%);
+    animation:drift2 26s ease-in-out infinite;
+}
+
+.orb-3{
+    width:380px;
+    height:380px;
+    left:20%;
+    bottom:-160px;
+    background:radial-gradient(circle,var(--gold),transparent 70%);
+    opacity:.18;
+    animation:drift3 30s ease-in-out infinite;
+}
+
+@keyframes drift1{
+    0%,100%{transform:translate(0,0) scale(1)}
+    50%{transform:translate(60px,80px) scale(1.15)}
+}
+
+@keyframes drift2{
+    0%,100%{transform:translate(0,0) scale(1)}
+    50%{transform:translate(-70px,-40px) scale(1.1)}
+}
+
+@keyframes drift3{
+    0%,100%{transform:translate(0,0) scale(1)}
+    50%{transform:translate(40px,-50px) scale(1.2)}
+}
+
+/* GRAIN TEXTURE */
+.grain{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    opacity:.05;
+    mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* CORNER GLOWS */
+.corner-glow{
+    position:fixed;
+    z-index:-3;
+    width:280px;
+    height:280px;
+    pointer-events:none;
+    opacity:.5;
+    filter:blur(50px);
+}
+
+.corner-glow.tl{
+    top:-60px;
+    left:-60px;
+    background:radial-gradient(circle,rgba(57,255,140,.25),transparent 70%);
+}
+
+.corner-glow.br{
+    bottom:-60px;
+    right:-60px;
+    background:radial-gradient(circle,rgba(255,138,76,.18),transparent 70%);
+}
+
+/* RUST CORROSION SPOTS */
+.rust-spots{
+    position:fixed;
+    inset:0;
+    z-index:-3;
+    pointer-events:none;
+    opacity:.5;
+    background-image:
+        radial-gradient(circle at 15% 30%,rgba(255,138,76,.10),transparent 12%),
+        radial-gradient(circle at 82% 18%,rgba(255,138,76,.07),transparent 9%),
+        radial-gradient(circle at 70% 75%,rgba(255,138,76,.09),transparent 14%),
+        radial-gradient(circle at 30% 88%,rgba(255,138,76,.06),transparent 10%),
+        radial-gradient(circle at 92% 55%,rgba(57,255,140,.05),transparent 10%);
+    mix-blend-mode:screen;
+}
+
+/* EMBER PARTICLES */
+.embers{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.embers span{
+    position:absolute;
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:var(--rust);
+    box-shadow:0 0 6px 1px rgba(255,138,76,.8);
+    opacity:0;
+    animation:ember 6s ease-in infinite;
+}
+
+.embers span:nth-child(1){left:12%;bottom:0;animation-delay:.2s}
+.embers span:nth-child(2){left:28%;bottom:0;animation-delay:1.6s}
+.embers span:nth-child(3){left:44%;bottom:0;animation-delay:3s}
+.embers span:nth-child(4){left:58%;bottom:0;animation-delay:.9s}
+.embers span:nth-child(5){left:73%;bottom:0;animation-delay:2.4s}
+.embers span:nth-child(6){left:87%;bottom:0;animation-delay:4.1s}
+
+@keyframes ember{
+    0%{
+        transform:translateY(0) translateX(0) scale(.6);
+        opacity:0;
+    }
+    10%{
+        opacity:.9;
+    }
+    50%{
+        transform:translateY(-45vh) translateX(15px) scale(1);
+    }
+    90%{
+        opacity:.4;
+    }
+    100%{
+        transform:translateY(-85vh) translateX(-10px) scale(.4);
+        opacity:0;
+    }
+}
+
+/* HAZARD TAPE DIVIDER */
+.hazard-tape{
+    height:10px;
+    background:repeating-linear-gradient(
+        135deg,
+        #ffcc33,
+        #ffcc33 14px,
+        #16130a 14px,
+        #16130a 28px
+    );
+    opacity:.55;
+}
+
+/* ROTATING GEAR */
+.gear-bg{
+    position:fixed;
+    z-index:-3;
+    top:-180px;
+    right:-220px;
+    width:620px;
+    height:620px;
+    pointer-events:none;
+    opacity:.5;
+    animation:gearSpin 90s linear infinite;
+}
+
+.gear-bg::before{
+    content:"";
+    position:absolute;
+    inset:80px;
+    border-radius:50%;
+    border:2px solid rgba(255,138,76,.14);
+}
+
+.gear-bg::after{
+    content:"";
+    position:absolute;
+    inset:150px;
+    border-radius:50%;
+    border:1px solid rgba(255,138,76,.1);
+}
+
+.gear-bg .tooth{
+    position:absolute;
+    width:34px;
+    height:80px;
+    left:50%;
+    top:0;
+    margin-left:-17px;
+    background:rgba(255,138,76,.1);
+    transform-origin:17px 310px;
+}
+
+@keyframes gearSpin{
+    from{transform:rotate(0deg)}
+    to{transform:rotate(360deg)}
+}
+
+/* WASTELAND SKYLINE SCENE (hero background) */
+.skyline{
+    position:absolute;
+    z-index:-3;
+    left:0;
+    right:0;
+    bottom:0;
+    width:100%;
+    pointer-events:none;
+    opacity:.9;
+}
+
+.skyline svg{
+    width:100%;
+    height:auto;
+    display:block;
+}
+
+.beacon-light{
+    animation:beaconBlink 2.2s ease-in-out infinite;
+    filter:drop-shadow(0 0 5px rgba(255,77,94,.9));
+}
+
+@keyframes beaconBlink{
+    0%,100%{opacity:.25}
+    50%{opacity:1}
+}
+
+.fog{
+    position:absolute;
+    z-index:-2;
+    left:-25%;
+    right:-25%;
+    bottom:0;
+    height:150px;
+    pointer-events:none;
+    opacity:.3;
+    filter:blur(20px);
+    background:linear-gradient(90deg,transparent,rgba(180,210,195,.3),transparent);
+    animation:fogDrift 28s linear infinite;
+}
+
+.fog.fog-2{
+    bottom:34px;
+    height:110px;
+    opacity:.18;
+    animation-duration:36s;
+    animation-direction:reverse;
+}
+
+@keyframes fogDrift{
+    from{transform:translateX(-8%)}
+    to{transform:translateX(8%)}
+}
+
+/* REACTOR CORE PULSE (behind hero title) */
+.reactor{
+    position:absolute;
+    z-index:-1;
+    left:50%;
+    top:46%;
+    width:10px;
+    height:10px;
+    pointer-events:none;
+}
+
+.reactor .ring{
+    position:absolute;
+    left:50%;
+    top:50%;
+    border:1px solid rgba(57,255,140,.16);
+    border-radius:50%;
+    transform:translate(-50%,-50%) scale(.4);
+    animation:reactorPulse 4.5s ease-out infinite;
+}
+
+.reactor .ring.r1{width:220px;height:220px;animation-delay:0s}
+.reactor .ring.r2{width:220px;height:220px;animation-delay:1.5s}
+.reactor .ring.r3{width:220px;height:220px;animation-delay:3s}
+
+@keyframes reactorPulse{
+    0%{transform:translate(-50%,-50%) scale(.3);opacity:0}
+    15%{opacity:.9}
+    100%{transform:translate(-50%,-50%) scale(2.4);opacity:0}
+}
+
+.reactor .core{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:var(--acid);
+    box-shadow:0 0 30px 10px rgba(57,255,140,.35);
+    transform:translate(-50%,-50%);
+    animation:coreGlow 2.4s ease-in-out infinite;
+}
+
+@keyframes coreGlow{
+    0%,100%{box-shadow:0 0 30px 10px rgba(57,255,140,.3)}
+    50%{box-shadow:0 0 46px 16px rgba(57,255,140,.55)}
+}
+
+/* ISLAND SILHOUETTE (bottom of page) */
+.island-silhouette{
+    position:fixed;
+    z-index:-4;
+    left:0;
+    right:0;
+    bottom:0;
+    height:220px;
+    pointer-events:none;
+    opacity:.55;
+}
+
+.island-silhouette svg{
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+.scan{
+    position:fixed;
+    left:0;
+    right:0;
+    top:-5%;
+    height:2px;
+    z-index:50;
+    pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(57,255,140,.5),transparent);
+    box-shadow:0 0 20px rgba(57,255,140,.4);
+    animation:scan 7s linear infinite;
+}
+
+@keyframes scan{
+    from{top:-5%}
+    to{top:105%}
+}
+
+.particles{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.particles span{
+    position:absolute;
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:var(--acid);
+    opacity:.4;
+    animation:float 8s linear infinite;
+}
+
+.particles span:nth-child(1){left:8%;top:20%;animation-delay:0s}
+.particles span:nth-child(2){left:20%;top:70%;animation-delay:2s}
+.particles span:nth-child(3){left:35%;top:40%;animation-delay:4s}
+.particles span:nth-child(4){left:50%;top:80%;animation-delay:1s}
+.particles span:nth-child(5){left:65%;top:25%;animation-delay:3s}
+.particles span:nth-child(6){left:78%;top:60%;animation-delay:5s}
+.particles span:nth-child(7){left:90%;top:35%;animation-delay:2s}
+.particles span:nth-child(8){left:45%;top:10%;animation-delay:6s}
+
+@keyframes float{
+    0%{transform:translateY(0) scale(1);opacity:.1}
+    50%{opacity:.7}
+    100%{transform:translateY(-100px) scale(1.5);opacity:0}
+}
+
+/* NAV */
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:100;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 7%;
+    background:rgba(5,7,5,.8);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid var(--line);
+}
+
+.logo{
+    color:var(--acid);
+    font-size:21px;
+    font-weight:700;
+    letter-spacing:3px;
+    text-decoration:none;
+}
+
+.nav-links{
+    display:flex;
+    gap:28px;
+}
+
+.nav-links a{
+    color:var(--text-dim);
+    text-decoration:none;
+    font-size:14px;
+    font-weight:500;
+    letter-spacing:.3px;
+    transition:.25s;
+}
+
+.nav-links a:hover{
+    color:var(--acid);
+}
+
+/* HERO */
+.hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:120px 20px 80px;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:900px;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 16px;
+    margin-bottom:28px;
+    border:1px solid var(--line-accent);
+    color:var(--acid);
+    background:var(--acid-dim);
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:2px;
+    clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+}
+
+.badge::before{
+    content:"";
+    width:6px;
+    height:6px;
+    background:var(--acid);
+    box-shadow:0 0 8px var(--acid);
+}
+
+.hero h1{
+    font-size:clamp(52px,10vw,108px);
+    line-height:.92;
+    font-weight:700;
+    letter-spacing:-1px;
+    margin-bottom:25px;
+    text-shadow:0 0 15px rgba(57,255,140,.2),0 0 50px rgba(57,255,140,.1);
+}
+
+.hero h1 span{
+    color:var(--acid);
+}
+
+.hero p{
+    max-width:620px;
+    margin:auto;
+    color:var(--text-dim);
+    line-height:1.7;
+    font-size:17px;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-top:38px;
+}
+
+.btn{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:11px;
+    min-width:170px;
+    padding:14px 24px;
+    border:0;
+    text-decoration:none;
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:.5px;
+    cursor:pointer;
+    transition:transform .25s ease,box-shadow .25s ease;
+    clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px);
+    overflow:hidden;
+    isolation:isolate;
+}
+
+/* shine sweep */
+.btn::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+    background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.35) 48%,transparent 66%);
+    transform:translateX(-120%);
+    transition:transform .6s ease;
+    pointer-events:none;
+}
+
+.btn:hover::before{
+    transform:translateX(120%);
+}
+
+.btn-icon{
+    font-size:16px;
+    line-height:1;
+}
+
+.btn-icon-badge{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    background:rgba(255,255,255,.92);
+    flex-shrink:0;
+    position:relative;
+    z-index:2;
+}
+
+.btn-icon-badge svg{
+    width:16px;
+    height:16px;
+    display:block;
+}
+
+.btn span.btn-label{
+    position:relative;
+    z-index:2;
+}
+
+.btn-primary{
+    background:var(--acid);
+    color:#00170c;
+    box-shadow:0 0 0 1px rgba(57,255,140,.3),0 8px 24px rgba(57,255,140,.18);
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px) scale(1.02);
+    box-shadow:0 0 0 1px rgba(57,255,140,.55),0 16px 40px rgba(57,255,140,.35);
+}
+
+.btn-primary:active{
+    transform:translateY(0) scale(.98);
+}
+
+.btn-secondary{
+    color:var(--text);
+    background:rgba(255,255,255,.03);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);
+}
+
+.btn-secondary:hover{
+    box-shadow:inset 0 0 0 1px var(--acid),0 12px 30px rgba(57,255,140,.15);
+    color:var(--acid);
+    transform:translateY(-3px) scale(1.02);
+}
+
+.btn-rust{
+    color:var(--rust);
+    background:rgba(255,138,76,.06);
+    box-shadow:inset 0 0 0 1px rgba(255,138,76,.3);
+}
+
+.btn-rust:hover{
+    background:rgba(255,138,76,.12);
+    box-shadow:inset 0 0 0 1px var(--rust),0 12px 30px rgba(255,138,76,.2);
+    transform:translateY(-3px) scale(1.02);
+}
+
+/* SECTIONS */
+section{
+    padding:100px 7%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.section-title small{
+    color:var(--acid);
+    letter-spacing:3px;
+    font-weight:600;
+    font-size:13px;
+}
+
+.section-title h2{
+    margin-top:12px;
+    font-weight:700;
+    font-size:clamp(34px,5vw,58px);
+}
+
+/* CARDS */
+.cards{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    position:relative;
+    padding:32px 28px;
+    border:1px solid var(--line);
+    background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
+    transition:.3s;
+    clip-path:polygon(0 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%);
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    border-color:var(--line-accent);
+    box-shadow:0 15px 50px rgba(0,0,0,.35);
+}
+
+.card-icon{
+    font-size:32px;
+    margin-bottom:18px;
+}
+
+.card h3{
+    margin-bottom:10px;
+    font-weight:700;
+    font-size:20px;
+    letter-spacing:.3px;
+}
+
+.card p{
+    color:var(--text-dim);
+    line-height:1.6;
+    font-size:14.5px;
+}
+
+/* STATS */
+.stats{
+    max-width:1000px;
+    margin:30px auto 0;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.stat{
+    text-align:center;
+    padding:26px;
+    background:var(--acid-dim);
+    border:1px solid var(--line-accent);
+}
+
+.stat strong{
+    display:block;
+    color:var(--acid);
+    font-size:34px;
+    font-weight:700;
+}
+
+.stat span{
+    color:var(--text-faint);
+    font-size:12px;
+    letter-spacing:1px;
+}
+
+/* GAME */
+.game-section{
+    padding-top:80px;
+}
+
+.game-container{
+    max-width:900px;
+    margin:auto;
+}
+
+.game-box{
+    position:relative;
+    overflow:hidden;
+    border:1px solid var(--line-accent);
+    background:
+        radial-gradient(circle at center,rgba(57,255,140,.08),transparent 55%),
+        rgba(255,255,255,.025);
+    box-shadow:0 0 60px rgba(57,255,140,.06),inset 0 0 50px rgba(57,255,140,.025);
+    transition:box-shadow .25s ease;
+}
+
+.game-box.hit{
+    box-shadow:0 0 60px rgba(255,77,94,.35),inset 0 0 60px rgba(255,77,94,.15);
+    animation:shake .22s ease-in-out;
+}
+
+.game-box.overdrive{
+    box-shadow:0 0 70px rgba(255,209,102,.4),inset 0 0 60px rgba(255,209,102,.18);
+    animation:overdrivePulse 1s ease-in-out infinite;
+}
+
+@keyframes shake{
+    0%,100%{transform:translateX(0)}
+    25%{transform:translateX(-6px)}
+    75%{transform:translateX(6px)}
+}
+
+@keyframes overdrivePulse{
+    0%,100%{box-shadow:0 0 70px rgba(255,209,102,.35),inset 0 0 60px rgba(255,209,102,.15)}
+    50%{box-shadow:0 0 90px rgba(255,209,102,.55),inset 0 0 70px rgba(255,209,102,.28)}
+}
+
+.overdrive-banner{
+    position:absolute;
+    top:10px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:15;
+    padding:5px 14px;
+    background:linear-gradient(120deg,var(--rust),var(--gold));
+    color:#241300;
+    font-family:'Rajdhani',Arial,sans-serif;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:1px;
+    clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);
+    display:none;
+}
+
+.overdrive-banner.show{
+    display:block;
+    animation:bannerBob .5s ease-in-out infinite alternate;
+}
+
+@keyframes bannerBob{
+    from{transform:translateX(-50%) translateY(0)}
+    to{transform:translateX(-50%) translateY(-3px)}
+}
+
+/* RANK BADGE */
+.rank-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:5px 13px;
+    margin-top:10px;
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    font-family:'Rajdhani',Arial,sans-serif;
+    clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);
+}
+
+.rank-badge.rookie{color:#8b9791;background:rgba(139,151,145,.12)}
+.rank-badge.scavenger{color:var(--acid);background:var(--acid-dim)}
+.rank-badge.raider{color:var(--rust);background:rgba(255,138,76,.12)}
+.rank-badge.warlord{color:var(--gold);background:rgba(255,209,102,.12)}
+.rank-badge.legend{color:#ff5ee0;background:rgba(255,94,224,.12)}
+
+.session-note{
+    font-size:12px;
+    color:var(--text-faint);
+    margin-top:14px;
+}
+
+.record-flag{
+    display:none;
+    margin-top:10px;
+    color:var(--gold);
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:1px;
+    animation:recordPop .6s ease;
+}
+
+.record-flag.show{
+    display:block;
+}
+
+@keyframes recordPop{
+    0%{transform:scale(.6);opacity:0}
+    60%{transform:scale(1.15);opacity:1}
+    100%{transform:scale(1)}
+}
+
+.game-head{
+    position:relative;
+    z-index:20;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:20px 25px;
+    border-bottom:1px solid var(--line);
+    background:rgba(0,0,0,.3);
+}
+
+.game-head h3{
+    color:var(--acid);
+    letter-spacing:2px;
+    font-weight:700;
+}
+
+.game-stats{
+    display:flex;
+    gap:16px;
+}
+
+.game-stat{
+    min-width:52px;
+    text-align:center;
+}
+
+.game-stat small{
+    display:block;
+    color:var(--text-faint);
+    font-size:9px;
+    letter-spacing:1.5px;
+}
+
+.game-stat strong{
+    color:#fff;
+    font-size:19px;
+    font-weight:700;
+}
+
+.game-stat.combo strong{
+    color:var(--gold);
+    transition:transform .15s ease;
+}
+
+.game-stat.combo.pulse strong{
+    transform:scale(1.25);
+}
+
+.time-track{
+    position:relative;
+    z-index:20;
+    height:4px;
+    background:rgba(255,255,255,.06);
+}
+
+.time-fill{
+    height:100%;
+    width:100%;
+    background:linear-gradient(90deg,var(--acid),var(--gold));
+    transition:width 1s linear;
+}
+
+.game-area{
+    position:relative;
+    height:410px;
+    overflow:hidden;
+}
+
+.game-overlay{
+    position:absolute;
+    inset:0;
+    z-index:10;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+    text-align:center;
+    background:rgba(3,5,4,.86);
+    backdrop-filter:blur(8px);
+}
+
+.game-overlay.hidden{
+    display:none;
+}
+
+.game-overlay h3{
+    margin-bottom:12px;
+    color:var(--acid);
+    font-size:38px;
+    font-weight:700;
+}
+
+.game-overlay p{
+    max-width:500px;
+    margin-bottom:8px;
+    color:var(--text-dim);
+    line-height:1.6;
+}
+
+.overlay-legend{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin:14px 0 25px;
+    font-size:13px;
+    color:var(--text-dim);
+}
+
+.overlay-legend span{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+}
+
+.overlay-summary{
+    display:flex;
+    gap:22px;
+    margin-bottom:25px;
+}
+
+.overlay-summary div{
+    text-align:center;
+}
+
+.overlay-summary strong{
+    display:block;
+    font-size:28px;
+    color:var(--acid);
+}
+
+.overlay-summary span{
+    font-size:11px;
+    letter-spacing:1px;
+    color:var(--text-faint);
+}
+
+.loot{
+    position:absolute;
+    z-index:5;
+    width:60px;
+    height:60px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:32px;
+    cursor:pointer;
+    user-select:none;
+    -webkit-user-select:none;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+    background:var(--acid-dim);
+    border:1px solid var(--line-accent);
+    box-shadow:0 0 20px rgba(57,255,140,.12),inset 0 0 20px rgba(57,255,140,.04);
+    animation:lootAppear .16s ease-out;
+    clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+}
+
+.loot.rare{
+    background:rgba(255,209,102,.1);
+    border-color:rgba(255,209,102,.4);
+    box-shadow:0 0 26px rgba(255,209,102,.25),inset 0 0 20px rgba(255,209,102,.08);
+}
+
+.loot.hazard{
+    background:rgba(255,77,94,.1);
+    border-color:rgba(255,77,94,.4);
+    box-shadow:0 0 22px rgba(255,77,94,.2),inset 0 0 20px rgba(255,77,94,.06);
+}
+
+.loot.timebonus{
+    background:rgba(120,180,255,.1);
+    border-color:rgba(120,180,255,.4);
+    box-shadow:0 0 22px rgba(120,180,255,.2);
+}
+
+.loot.overdrive{
+    background:rgba(255,209,102,.12);
+    border-color:rgba(255,209,102,.5);
+    box-shadow:0 0 26px rgba(255,209,102,.3);
+}
+
+.loot:active{
+    transform:scale(.85);
+}
+
+@keyframes lootAppear{
+    from{opacity:0;transform:scale(.3)}
+    to{opacity:1;transform:scale(1)}
+}
+
+.loot.despawn{
+    animation:lootDespawn .35s ease-in forwards;
+    pointer-events:none;
+}
+
+@keyframes lootDespawn{
+    to{opacity:0;transform:scale(.4) rotate(15deg)}
+}
+
+.collect-text{
+    position:absolute;
+    z-index:8;
+    pointer-events:none;
+    color:var(--acid);
+    font-family:'Rajdhani',Arial,sans-serif;
+    font-size:20px;
+    font-weight:700;
+    text-shadow:0 0 10px rgba(57,255,140,.7);
+    animation:points .7s ease-out forwards;
+}
+
+.collect-text.bad{
+    color:var(--danger);
+    text-shadow:0 0 10px rgba(255,77,94,.7);
+}
+
+.collect-text.good{
+    color:var(--gold);
+    text-shadow:0 0 10px rgba(255,209,102,.7);
+}
+
+@keyframes points{
+    0%{opacity:1;transform:translateY(0) scale(1)}
+    100%{opacity:0;transform:translateY(-45px) scale(1.2)}
+}
+
+/* COMMUNITY */
+.social{
+    max-width:900px;
+    margin:auto;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+/* SUPPORT */
+.support-section{
+    padding-top:70px;
+    padding-bottom:70px;
+    text-align:center;
+}
+
+.support-box{
+    max-width:560px;
+    margin:auto;
+}
+
+.support-box p{
+    color:var(--text-dim);
+    line-height:1.7;
+    font-size:15px;
+    margin-bottom:30px;
+}
+
+.btn-support{
+    color:#241300;
+    background:linear-gradient(120deg,var(--rust),var(--gold));
+    box-shadow:0 0 0 1px rgba(255,209,102,.4),0 10px 30px rgba(255,138,76,.3);
+    min-width:220px;
+}
+
+.btn-support:hover{
+    transform:translateY(-3px) scale(1.03);
+    box-shadow:0 0 0 1px rgba(255,209,102,.6),0 16px 42px rgba(255,138,76,.45);
+}
+
+/* FOOTER */
+footer{
+    padding:50px 20px;
+    text-align:center;
+    color:var(--text-faint);
+    border-top:1px solid var(--line);
+    font-size:14px;
+}
+
+footer strong{
+    color:var(--acid);
+}
+
+/* MOBILE */
+@media(max-width:800px){
+    nav{padding:15px 5%}
+    .nav-links{display:none}
+    section{padding:75px 5%}
+    .cards{grid-template-columns:1fr}
+    .stats{grid-template-columns:1fr}
+    .game-head{padding:15px}
+    .game-head h3{font-size:13px}
+    .game-stats{gap:10px}
+    .game-stat{min-width:40px}
+    .game-stat strong{font-size:15px}
+    .game-area{height:375px}
+    .loot{width:54px;height:54px;font-size:28px}
+    .overlay-summary{gap:14px}
+}
+
+@media(max-width:450px){
+    .hero{padding-left:15px;padding-right:15px}
+    .hero h1{font-size:52px}
+    .hero p{font-size:15px}
+    .buttons{flex-direction:column}
+    .btn{width:100%}
+    .game-overlay h3{font-size:30px}
+    .game-area{height:360px}
+    .overlay-legend{font-size:11.5px;gap:10px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="scan"></div>
+
+<div class="orb-field">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+</div>
+
+<div class="corner-glow tl"></div>
+<div class="corner-glow br"></div>
+
+<div class="rust-spots"></div>
+
+<div class="gear-bg" aria-hidden="true">
+    <span class="tooth" style="transform:rotate(0deg)"></span>
+    <span class="tooth" style="transform:rotate(30deg)"></span>
+    <span class="tooth" style="transform:rotate(60deg)"></span>
+    <span class="tooth" style="transform:rotate(90deg)"></span>
+    <span class="tooth" style="transform:rotate(120deg)"></span>
+    <span class="tooth" style="transform:rotate(150deg)"></span>
+    <span class="tooth" style="transform:rotate(180deg)"></span>
+    <span class="tooth" style="transform:rotate(210deg)"></span>
+    <span class="tooth" style="transform:rotate(240deg)"></span>
+    <span class="tooth" style="transform:rotate(270deg)"></span>
+    <span class="tooth" style="transform:rotate(300deg)"></span>
+    <span class="tooth" style="transform:rotate(330deg)"></span>
+</div>
+
+<div class="island-silhouette" aria-hidden="true">
+    <svg viewBox="0 0 1200 220" preserveAspectRatio="none">
+        <path d="M0 160 L60 140 L140 150 L220 110 L300 130 L380 95 L470 120 L560 90 L650 115 L740 85 L830 118 L920 100 L1010 130 L1100 105 L1200 140 L1200 220 L0 220 Z" fill="none" stroke="#39ff8c" stroke-width="1" opacity="0.35"/>
+        <path d="M0 180 L80 165 L170 175 L260 150 L350 168 L440 140 L540 162 L630 138 L720 160 L810 135 L900 158 L1000 142 L1100 165 L1200 150 L1200 220 L0 220 Z" fill="none" stroke="#ff8a4c" stroke-width="1" opacity="0.3"/>
+        <path d="M0 205 L100 195 L210 202 L320 188 L430 200 L540 182 L650 198 L760 180 L870 197 L980 185 L1090 200 L1200 190 L1200 220 L0 220 Z" fill="rgba(57,255,140,.06)" stroke="#39ff8c" stroke-width="1" opacity="0.4"/>
+    </svg>
+</div>
+
+<div class="grain"></div>
+
+<div class="embers">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+</div>
+
+<div class="particles">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+</div>
+
+<!-- NAV -->
+<nav>
+    <a href="#" class="logo">OXIDE // UZ</a>
+    <div class="nav-links">
+        <a href="#about">ABOUT</a>
+        <a href="#game">MINI GAME</a>
+        <a href="#community">COMMUNITY</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+
+    <div class="skyline" aria-hidden="true">
+        <svg viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice">
+            <path d="M0,270 Q200,232 400,264 T800,258 T1200,268 T1440,252 L1440,320 L0,320 Z" fill="#0b0704" opacity=".45"/>
+
+            <rect x="0" y="292" width="1440" height="28" fill="#0b0704"/>
+
+            <!-- watchtower -->
+            <g transform="translate(120,0)">
+                <polygon points="20,292 2,150 40,150" fill="#0b0704"/>
+                <polygon points="60,292 78,150 40,150" fill="#0b0704"/>
+                <rect x="0" y="140" width="80" height="12" fill="#0b0704"/>
+                <rect x="14" y="98" width="52" height="42" fill="#0b0704"/>
+                <rect x="36" y="66" width="4" height="34" fill="#0b0704"/>
+                <circle class="beacon-light" cx="38" cy="62" r="5" fill="#ff4d5e"/>
+            </g>
+
+            <!-- barrel cluster -->
+            <g transform="translate(430,0)">
+                <rect x="18" y="212" width="38" height="38" rx="6" fill="#0b0704"/>
+                <rect x="0" y="250" width="40" height="42" rx="6" fill="#0b0704"/>
+                <rect x="46" y="242" width="40" height="50" rx="6" fill="#0b0704"/>
+                <rect x="92" y="256" width="38" height="36" rx="6" fill="#0b0704"/>
+            </g>
+
+            <!-- radio tower -->
+            <g transform="translate(760,0)">
+                <polygon points="30,292 45,58 60,292" fill="none" stroke="#0b0704" stroke-width="5"/>
+                <line x1="13" y1="222" x2="77" y2="222" stroke="#0b0704" stroke-width="4"/>
+                <line x1="19" y1="164" x2="71" y2="164" stroke="#0b0704" stroke-width="4"/>
+                <line x1="25" y1="112" x2="65" y2="112" stroke="#0b0704" stroke-width="4"/>
+                <line x1="45" y1="58" x2="45" y2="26" stroke="#0b0704" stroke-width="4"/>
+                <circle class="beacon-light" cx="45" cy="22" r="5" fill="#ff4d5e"/>
+            </g>
+
+            <!-- storage tank -->
+            <g transform="translate(1120,0)">
+                <rect x="0" y="188" width="150" height="104" rx="8" fill="#0b0704"/>
+                <ellipse cx="75" cy="188" rx="75" ry="14" fill="#0b0704"/>
+                <rect x="64" y="156" width="22" height="34" fill="#0b0704"/>
+            </g>
+
+            <!-- perimeter fence, left -->
+            <g stroke="#0b0704" stroke-width="3" opacity=".7">
+                <line x1="0" y1="278" x2="300" y2="278"/>
+                <line x1="0" y1="264" x2="300" y2="264"/>
+            </g>
+        </svg>
+    </div>
+
+    <div class="fog"></div>
+    <div class="fog fog-2"></div>
+
+    <div class="reactor" aria-hidden="true">
+        <span class="ring r1"></span>
+        <span class="ring r2"></span>
+        <span class="ring r3"></span>
+        <span class="core"></span>
+    </div>
+
+    <div class="hero-content">
+
+        <div class="badge">OXIDE SURVIVAL CREATOR</div>
+
+        <h1>OXIDE<br><span>SURVIVAL UZ</span></h1>
+
+        <p>
+            OXIDE Survival Island bo‘yicha Uzbek gaming community.
+            Yangiliklar, videolar, serverlar, o‘yinchilar va eksklyuziv kontent.
+        </p>
+
+        <div class="buttons">
+            <a class="btn btn-primary" href="https://www.youtube.com/@OxideSurvivalUZ" target="_blank" rel="noopener">
+                <span class="btn-icon-badge">
+                    <svg viewBox="0 0 24 24"><path fill="#FF0000" d="M23.5 6.5c-.3-1.1-1.1-1.9-2.2-2.1C19.3 4 12 4 12 4s-7.3 0-9.3.4C1.6 4.6.8 5.4.5 6.5 0 8.4 0 12 0 12s0 3.6.5 5.5c.3 1.1 1.1 1.9 2.2 2.1C4.7 20 12 20 12 20s7.3 0 9.3-.4c1.1-.2 1.9-1 2.2-2.1.5-1.9.5-5.5.5-5.5s0-3.6-.5-5.5z"/><path fill="#fff" d="M9.6 15.5V8.5L15.8 12l-6.2 3.5z"/></svg>
+                </span>
+                <span class="btn-label">YouTube</span>
+            </a>
+            <a class="btn btn-secondary" href="https://www.instagram.com/OxideSurvivalUZ/" target="_blank" rel="noopener">
+                <span class="btn-icon-badge">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="none" stroke="#E1306C" stroke-width="2"/><circle cx="12" cy="12" r="4.6" fill="none" stroke="#E1306C" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3" fill="#E1306C"/></svg>
+                </span>
+                <span class="btn-label">Instagram</span>
+            </a>
+            <a class="btn btn-rust" href="https://t.me/OxideSurvivalUZ" target="_blank" rel="noopener">
+                <span class="btn-icon-badge">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#229ED9"/><path fill="#fff" d="M17.4 7.3 15.7 17c-.1.6-.5.7-1 .4l-2.7-2-1.3 1.3c-.2.2-.3.3-.6.3l.2-3.1 5.6-5c.2-.2 0-.3-.3-.1l-6.9 4.3-3-.9c-.6-.2-.7-.6.1-.9l11.6-4.5c.5-.2 1 .1.9.6z"/></svg>
+                </span>
+                <span class="btn-label">Telegram</span>
+            </a>
+        </div>
+
+    </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+
+    <div class="section-title">
+        <small>OXIDE COMMUNITY</small>
+        <h2>Survive. Build. Fight.</h2>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="card-icon">🎮</div>
+            <h3>Gaming</h3>
+            <p>OXIDE Survival Island bo‘yicha gameplay, PvP, raid, base building va boshqa kontentlar.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">⚡</div>
+            <h3>Community</h3>
+            <p>O‘zbekistonlik OXIDE o‘yinchilarini bir joyga birlashtiruvchi community.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🔥</div>
+            <h3>Creator</h3>
+            <p>OXIDE Survival UZ orqali yangi o‘yinchilarni OXIDE olamiga jalb qilish va rivojlantirish.</p>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="stat"><strong>1100+</strong><span>COMMUNITY</span></div>
+        <div class="stat"><strong>300+</strong><span>PLAYERS HELPED</span></div>
+        <div class="stat"><strong>24/7</strong><span>OXIDE CONTENT</span></div>
+    </div>
+
+</section>
+
+<!-- MINI GAME -->
+<section id="game" class="game-section">
+
+    <div class="section-title">
+        <small>OXIDE MINI GAME</small>
+        <h2>Loot Hunt</h2>
+    </div>
+
+    <div class="game-container">
+        <div class="game-box" id="gameBox">
+
+            <div class="game-head">
+                <h3>LOOT HUNT</h3>
+                <div class="game-stats">
+                    <div class="game-stat"><small>TIME</small><strong id="time">30</strong></div>
+                    <div class="game-stat"><small>SCORE</small><strong id="score">0</strong></div>
+                    <div class="game-stat combo" id="comboStat"><small>COMBO</small><strong id="combo">x1</strong></div>
+                    <div class="game-stat"><small>BEST</small><strong id="best">0</strong></div>
+                </div>
+            </div>
+
+            <div class="time-track"><div class="time-fill" id="timeFill"></div></div>
+
+            <div id="gameArea" class="game-area">
+
+                <div id="gameStart" class="game-overlay">
+                    <h3>LOOT HUNT</h3>
+                    <p>30 soniya ichida imkon qadar ko‘p loot yig‘ va combo'ni uzmay ushlab tur.</p>
+                    <div class="overlay-legend">
+                        <span>📦 oddiy loot</span>
+                        <span>💎 kamyob — ko‘p ball</span>
+                        <span>🧪 radiatsiya — ball ayiradi</span>
+                        <span>⏱ medkit — +3 soniya</span>
+                        <span>⚡ overdrive — 2x ball</span>
+                    </div>
+                    <span id="rankBadge" class="rank-badge rookie">ROOKIE</span>
+                    <button id="startGameBtn" class="btn btn-primary" type="button" style="margin-top:22px;">START GAME</button>
+                    <p id="sessionNote" class="session-note">Jami o‘yinlar: 0</p>
+                </div>
+
+                <div id="gameOver" class="game-overlay hidden">
+                    <h3>GAME OVER</h3>
+                    <div class="overlay-summary">
+                        <div><strong id="finalScore">0</strong><span>SCORE</span></div>
+                        <div><strong id="finalCombo">x1</strong><span>ENG YUQORI COMBO</span></div>
+                    </div>
+                    <span id="finalRankBadge" class="rank-badge rookie">ROOKIE</span>
+                    <p id="recordFlag" class="record-flag">🏆 YANGI REKORD!</p>
+                    <button id="againBtn" class="btn btn-primary" type="button" style="margin-top:18px;">PLAY AGAIN</button>
+                </div>
+
+                <div id="overdriveBanner" class="overdrive-banner">⚡ OVERDRIVE — 2x BALL</div>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<!-- COMMUNITY -->
+<section id="community">
+
+    <div class="section-title">
+        <small>JOIN US</small>
+        <h2>OXIDE Community</h2>
+    </div>
+
+    <div class="social">
+        <a class="btn btn-rust" href="https://t.me/OxideSurvivalUZ" target="_blank" rel="noopener">
+            <span class="btn-icon-badge">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#229ED9"/><path fill="#fff" d="M17.4 7.3 15.7 17c-.1.6-.5.7-1 .4l-2.7-2-1.3 1.3c-.2.2-.3.3-.6.3l.2-3.1 5.6-5c.2-.2 0-.3-.3-.1l-6.9 4.3-3-.9c-.6-.2-.7-.6.1-.9l11.6-4.5c.5-.2 1 .1.9.6z"/></svg>
+            </span>
+            <span class="btn-label">Telegram</span>
+        </a>
+        <a class="btn btn-secondary" href="https://www.instagram.com/OxideSurvivalUZ/" target="_blank" rel="noopener">
+            <span class="btn-icon-badge">
+                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="none" stroke="#E1306C" stroke-width="2"/><circle cx="12" cy="12" r="4.6" fill="none" stroke="#E1306C" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3" fill="#E1306C"/></svg>
+            </span>
+            <span class="btn-label">Instagram</span>
+        </a>
+        <a class="btn btn-primary" href="https://www.youtube.com/@OxideSurvivalUZ" target="_blank" rel="noopener">
+            <span class="btn-icon-badge">
+                <svg viewBox="0 0 24 24"><path fill="#FF0000" d="M23.5 6.5c-.3-1.1-1.1-1.9-2.2-2.1C19.3 4 12 4 12 4s-7.3 0-9.3.4C1.6 4.6.8 5.4.5 6.5 0 8.4 0 12 0 12s0 3.6.5 5.5c.3 1.1 1.1 1.9 2.2 2.1C4.7 20 12 20 12 20s7.3 0 9.3-.4c1.1-.2 1.9-1 2.2-2.1.5-1.9.5-5.5.5-5.5s0-3.6-.5-5.5z"/><path fill="#fff" d="M9.6 15.5V8.5L15.8 12l-6.2 3.5z"/></svg>
+            </span>
+            <span class="btn-label">YouTube</span>
+        </a>
+    </div>
+
+</section>
+
+<div class="hazard-tape"></div>
+
+<!-- SUPPORT -->
+<section id="support" class="support-section">
+
+    <div class="section-title">
+        <small>SUPPORT THE MISSION</small>
+        <h2>Qo‘llab-quvvatlash</h2>
+    </div>
+
+    <div class="support-box">
+        <p>
+            OXIDE Survival UZ kontentini yaratishda davom etishimizga yordam bering.
+            Har qanday homiylik loyihani rivojlantirish uchun juda muhim.
+        </p>
+
+        <a class="btn btn-support" href="https://taps.uz/oxidesurvivaluz/d" target="_blank" rel="noopener">
+            <span class="btn-icon-badge">
+                <svg viewBox="0 0 24 24"><path fill="#ffd166" d="M12 21s-7.5-4.6-10-9.3C.4 8.6 2 5 5.6 5c2 0 3.5 1.1 4.4 2.6C10.9 6.1 12.4 5 14.4 5 18 5 19.6 8.6 22 11.7 19.5 16.4 12 21 12 21z"/></svg>
+            </span>
+            <span class="btn-label">Homiylik qilish</span>
+        </a>
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 <strong>OXIDE Survival UZ</strong></p>
+    <p style="margin-top:10px;">Survival Island Uzbek Gaming Community</p>
+</footer>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+    var gameBox = document.getElementById("gameBox");
+    var gameArea = document.getElementById("gameArea");
+    var gameStart = document.getElementById("gameStart");
+    var gameOver = document.getElementById("gameOver");
+
+    var startButton = document.getElementById("startGameBtn");
+    var againButton = document.getElementById("againBtn");
+
+    var timeDisplay = document.getElementById("time");
+    var timeFill = document.getElementById("timeFill");
+    var scoreDisplay = document.getElementById("score");
+    var comboDisplay = document.getElementById("combo");
+    var comboStat = document.getElementById("comboStat");
+    var bestDisplay = document.getElementById("best");
+    var finalScoreDisplay = document.getElementById("finalScore");
+    var finalComboDisplay = document.getElementById("finalCombo");
+    var rankBadge = document.getElementById("rankBadge");
+    var finalRankBadge = document.getElementById("finalRankBadge");
+    var sessionNote = document.getElementById("sessionNote");
+    var recordFlag = document.getElementById("recordFlag");
+    var overdriveBanner = document.getElementById("overdriveBanner");
+
+    var TOTAL_TIME = 30;
+
+    var score = 0;
+    var time = TOTAL_TIME;
+    var timer = null;
+    var spawnTimer = null;
+    var playing = false;
+
+    var combo = 0;
+    var maxCombo = 1;
+    var lastCollect = 0;
+
+    var overdriveUntil = 0;
+    var overdriveTimer = null;
+
+    var best = 0;
+    var gamesPlayed = 0;
+
+    try{
+        best = parseInt(localStorage.getItem("oxideLootBest") || "0", 10);
+        gamesPlayed = parseInt(localStorage.getItem("oxideGamesPlayed") || "0", 10);
+    }catch(error){
+        best = 0;
+        gamesPlayed = 0;
+    }
+    if(isNaN(best)){ best = 0; }
+    if(isNaN(gamesPlayed)){ gamesPlayed = 0; }
+    bestDisplay.textContent = best;
+
+    function saveStat(key, value){
+        try{ localStorage.setItem(key, String(value)); }catch(error){}
+    }
+
+    /* ---------- SOUND (Web Audio, no external files) ---------- */
+    var audioCtx = null;
+
+    function ensureAudio(){
+        if(audioCtx){ return audioCtx; }
+        try{
+            var AC = window.AudioContext || window.webkitAudioContext;
+            audioCtx = new AC();
+        }catch(error){
+            audioCtx = null;
+        }
+        return audioCtx;
+    }
+
+    function playTone(freq, duration, type, volume){
+        var ctx = ensureAudio();
+        if(!ctx){ return; }
+        try{
+            var osc = ctx.createOscillator();
+            var gain = ctx.createGain();
+            osc.type = type || "sine";
+            osc.frequency.value = freq;
+            gain.gain.value = volume || .06;
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            gain.gain.exponentialRampToValueAtTime(.0001, ctx.currentTime + duration);
+            osc.stop(ctx.currentTime + duration);
+        }catch(error){}
+    }
+
+    function sfxCollect(){ playTone(620, .12, "triangle", .05); }
+    function sfxRare(){ playTone(880, .18, "triangle", .07); setTimeout(function(){ playTone(1180, .16, "triangle", .06); }, 70); }
+    function sfxHazard(){ playTone(140, .3, "sawtooth", .07); }
+    function sfxTime(){ playTone(500, .1, "sine", .05); setTimeout(function(){ playTone(700, .12, "sine", .05); }, 90); }
+    function sfxOverdrive(){ playTone(300, .1, "square", .05); setTimeout(function(){ playTone(600, .1, "square", .05); }, 80); setTimeout(function(){ playTone(900, .16, "square", .06); }, 160); }
+    function sfxStart(){ playTone(220, .08, "square", .05); setTimeout(function(){ playTone(440, .12, "square", .05); }, 90); }
+    function sfxGameOver(){ playTone(340, .16, "sawtooth", .06); setTimeout(function(){ playTone(220, .3, "sawtooth", .06); }, 130); }
+
+    function buzz(pattern){
+        try{
+            if(navigator.vibrate){ navigator.vibrate(pattern); }
+        }catch(error){}
+    }
+
+    /* ---------- RANK SYSTEM ---------- */
+    function rankFor(value){
+        if(value >= 700){ return { key:"legend", label:"OXIDE LEGEND" }; }
+        if(value >= 450){ return { key:"warlord", label:"WARLORD" }; }
+        if(value >= 250){ return { key:"raider", label:"RAIDER" }; }
+        if(value >= 100){ return { key:"scavenger", label:"SCAVENGER" }; }
+        return { key:"rookie", label:"ROOKIE" };
+    }
+
+    function paintRank(el, value){
+        var r = rankFor(value);
+        el.className = "rank-badge " + r.key;
+        el.textContent = r.label;
+    }
+
+    function refreshStartScreen(){
+        paintRank(rankBadge, best);
+        sessionNote.textContent = "Jami o‘yinlar: " + gamesPlayed + (best > 0 ? " · Rekord: " + best : "");
+    }
+
+    refreshStartScreen();
+
+    /* type: common, rare, hazard, timebonus, overdrive */
+    var lootTable = [
+        { emoji:"🪨", points:8,  type:"common",    weight:20 },
+        { emoji:"🪵", points:10, type:"common",    weight:18 },
+        { emoji:"📦", points:14, type:"common",    weight:16 },
+        { emoji:"🔩", points:18, type:"common",    weight:13 },
+        { emoji:"💎", points:45, type:"rare",       weight:9  },
+        { emoji:"👑", points:70, type:"rare",       weight:4  },
+        { emoji:"🧪", points:-25, type:"hazard",    weight:9  },
+        { emoji:"⏱️", points:0,  type:"timebonus",  weight:4  },
+        { emoji:"⚡", points:0,  type:"overdrive",  weight:3  }
+    ];
+
+    var totalWeight = 0;
+    for(var w = 0; w < lootTable.length; w++){
+        totalWeight += lootTable[w].weight;
+    }
+
+    function pickLootType(){
+        var roll = Math.random() * totalWeight;
+        var acc = 0;
+        for(var i = 0; i < lootTable.length; i++){
+            acc += lootTable[i].weight;
+            if(roll <= acc){
+                return lootTable[i];
+            }
+        }
+        return lootTable[0];
+    }
+
+    function activeLootCount(){
+        return gameArea.querySelectorAll(".loot").length;
+    }
+
+    function maxConcurrent(){
+        var elapsed = TOTAL_TIME - time;
+        if(elapsed > 20){ return 3; }
+        if(elapsed > 9){ return 2; }
+        return 1;
+    }
+
+    function spawnDelay(){
+        var elapsed = TOTAL_TIME - time;
+        var delay = 950 - elapsed * 18;
+        if(delay < 380){ delay = 380; }
+        return delay;
+    }
+
+    function clearBoard(){
+        var items = gameArea.querySelectorAll(".loot");
+        for(var i = 0; i < items.length; i++){
+            items[i].remove();
+        }
+        var popups = gameArea.querySelectorAll(".collect-text");
+        for(var j = 0; j < popups.length; j++){
+            popups[j].remove();
+        }
+    }
+
+    function resetHud(){
+        score = 0;
+        time = TOTAL_TIME;
+        combo = 0;
+        maxCombo = 1;
+
+        scoreDisplay.textContent = "0";
+        timeDisplay.textContent = String(TOTAL_TIME);
+        timeFill.style.width = "100%";
+        comboDisplay.textContent = "x1";
+    }
+
+    function startGame(){
+        clearInterval(timer);
+        clearInterval(spawnTimer);
+        clearTimeout(overdriveTimer);
+
+        playing = true;
+        resetHud();
+
+        overdriveUntil = 0;
+        gameBox.classList.remove("overdrive");
+        overdriveBanner.classList.remove("show");
+        recordFlag.classList.remove("show");
+
+        gameStart.classList.add("hidden");
+        gameOver.classList.add("hidden");
+
+        clearBoard();
+        scheduleSpawns();
+
+        sfxStart();
+        ensureAudio();
+
+        timer = setInterval(function(){
+            if(!playing){ return; }
+
+            time--;
+            timeDisplay.textContent = String(Math.max(0, time));
+            timeFill.style.width = Math.max(0, (time / TOTAL_TIME) * 100) + "%";
+
+            if(time <= 0){
+                finishGame();
+            }
+        }, 1000);
+    }
+
+    function scheduleSpawns(){
+        clearInterval(spawnTimer);
+
+        spawnTimer = setInterval(function(){
+            if(!playing){ return; }
+            if(activeLootCount() < maxConcurrent()){
+                spawnLoot();
+            }
+        }, spawnDelay());
+
+        /* re-tune spawn speed as difficulty ramps up */
+        setTimeout(function(){
+            if(playing){ scheduleSpawns(); }
+        }, spawnDelay());
+    }
+
+    function spawnLoot(){
+        if(!playing){ return; }
+
+        var data = pickLootType();
+
+        var loot = document.createElement("div");
+        loot.className = "loot";
+        if(data.type === "rare"){ loot.classList.add("rare"); }
+        if(data.type === "hazard"){ loot.classList.add("hazard"); }
+        if(data.type === "timebonus"){ loot.classList.add("timebonus"); }
+        if(data.type === "overdrive"){ loot.classList.add("overdrive"); }
+
+        loot.textContent = data.emoji;
+
+        var width = gameArea.clientWidth;
+        var height = gameArea.clientHeight;
+        var size = 60;
+
+        var maxX = Math.max(5, width - size - 5);
+        var maxY = Math.max(5, height - size - 5);
+
+        var x = Math.floor(Math.random() * maxX);
+        var y = Math.floor(Math.random() * maxY);
+
+        loot.style.left = x + "px";
+        loot.style.top = y + "px";
+
+        var lifespan = setTimeout(function(){
+            if(loot.parentNode){
+                loot.classList.add("despawn");
+                setTimeout(function(){ loot.remove(); }, 350);
+            }
+        }, 2600);
+
+        function onCollect(event){
+            if(event){ event.preventDefault(); }
+            clearTimeout(lifespan);
+            collectLoot(loot, data);
+        }
+
+        loot.addEventListener("click", onCollect);
+        loot.addEventListener("touchstart", onCollect, { passive:false });
+
+        gameArea.appendChild(loot);
+    }
+
+    function popupAt(loot, text, cls){
+        var rect = loot.getBoundingClientRect();
+        var areaRect = gameArea.getBoundingClientRect();
+
+        var popup = document.createElement("div");
+        popup.className = "collect-text" + (cls ? " " + cls : "");
+        popup.textContent = text;
+        popup.style.left = (rect.left - areaRect.left) + "px";
+        popup.style.top = (rect.top - areaRect.top) + "px";
+
+        gameArea.appendChild(popup);
+        setTimeout(function(){ popup.remove(); }, 700);
+    }
+
+    function pulseCombo(){
+        comboStat.classList.add("pulse");
+        setTimeout(function(){ comboStat.classList.remove("pulse"); }, 150);
+    }
+
+    function activateOverdrive(){
+        overdriveUntil = Date.now() + 4000;
+        gameBox.classList.add("overdrive");
+        overdriveBanner.classList.add("show");
+
+        clearTimeout(overdriveTimer);
+        overdriveTimer = setTimeout(function(){
+            gameBox.classList.remove("overdrive");
+            overdriveBanner.classList.remove("show");
+        }, 4000);
+    }
+
+    function isOverdrive(){
+        return Date.now() < overdriveUntil;
+    }
+
+    function collectLoot(loot, data){
+        if(!playing){ return; }
+
+        var now = Date.now();
+
+        if(data.type === "hazard"){
+
+            combo = 0;
+            comboDisplay.textContent = "x1";
+
+            score = Math.max(0, score + data.points);
+            scoreDisplay.textContent = String(score);
+
+            popupAt(loot, String(data.points), "bad");
+
+            gameBox.classList.add("hit");
+            setTimeout(function(){ gameBox.classList.remove("hit"); }, 220);
+
+            sfxHazard();
+            buzz([0,15,30,15]);
+
+        }else if(data.type === "timebonus"){
+
+            time = Math.min(TOTAL_TIME + 15, time + 3);
+            timeDisplay.textContent = String(time);
+            timeFill.style.width = Math.min(100, (time / TOTAL_TIME) * 100) + "%";
+
+            popupAt(loot, "+3s", "good");
+            sfxTime();
+            buzz(12);
+
+        }else if(data.type === "overdrive"){
+
+            activateOverdrive();
+            popupAt(loot, "OVERDRIVE!", "good");
+            sfxOverdrive();
+            buzz([0,20,40,20,40,20]);
+
+        }else{
+
+            if(now - lastCollect < 1200){
+                combo++;
+            }else{
+                combo = 1;
+            }
+            lastCollect = now;
+
+            var multiplier = 1 + Math.floor(combo / 3);
+            if(multiplier > 5){ multiplier = 5; }
+            if(multiplier > maxCombo){ maxCombo = multiplier; }
+
+            var gained = data.points * multiplier;
+            if(isOverdrive()){ gained *= 2; }
+
+            score += gained;
+            scoreDisplay.textContent = String(score);
+
+            comboDisplay.textContent = "x" + multiplier;
+            pulseCombo();
+
+            popupAt(loot, "+" + gained, data.type === "rare" ? "good" : null);
+
+            if(data.type === "rare"){
+                sfxRare();
+                buzz(25);
+            }else{
+                sfxCollect();
+                buzz(10);
+            }
+        }
+
+        loot.remove();
+    }
+
+    function finishGame(){
+        playing = false;
+
+        clearInterval(timer);
+        clearInterval(spawnTimer);
+        clearTimeout(overdriveTimer);
+        gameBox.classList.remove("overdrive");
+        overdriveBanner.classList.remove("show");
+        clearBoard();
+
+        finalScoreDisplay.textContent = String(score);
+        finalComboDisplay.textContent = "x" + maxCombo;
+
+        gamesPlayed++;
+        saveStat("oxideGamesPlayed", gamesPlayed);
+
+        var isNewRecord = score > best;
+
+        if(isNewRecord){
+            best = score;
+            bestDisplay.textContent = String(best);
+            saveStat("oxideLootBest", best);
+        }
+
+        paintRank(finalRankBadge, best);
+
+        if(isNewRecord){
+            recordFlag.classList.add("show");
+        }else{
+            recordFlag.classList.remove("show");
+        }
+
+        gameOver.classList.remove("hidden");
+        sfxGameOver();
+        buzz(isNewRecord ? [0,30,60,30,60,30] : 20);
+
+        refreshStartScreen();
+    }
+
+    startButton.addEventListener("click", startGame);
+    againButton.addEventListener("click", startGame);
+
+});
+</script>
+
+</body>
+</html>
